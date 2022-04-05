@@ -31,7 +31,7 @@ __meta__ = {
 [node name="Title" type="Label" parent="VBox"]
 margin_right = 320.0
 margin_bottom = 14.0
-text = "Host Game"
+text = "Join Game"
 align = 1
 
 [node name="Address" type="PanelContainer" parent="VBox"]
