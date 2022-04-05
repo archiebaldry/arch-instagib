@@ -1,0 +1,93 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Resources/MainTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Scripts/Scenes/Menus/Host.cs" type="Script" id=2]
+
+[node name="Host" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="VBox"]
+margin_right = 320.0
+margin_bottom = 14.0
+text = "Host Game"
+align = 1
+
+[node name="Port" type="PanelContainer" parent="VBox"]
+margin_top = 18.0
+margin_right = 320.0
+margin_bottom = 82.0
+rect_min_size = Vector2( 320, 0 )
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Port"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 313.0
+margin_bottom = 57.0
+
+[node name="Label" type="Label" parent="VBox/Port/VBox"]
+margin_right = 306.0
+margin_bottom = 14.0
+text = "Port"
+
+[node name="HBox" type="HBoxContainer" parent="VBox/Port/VBox"]
+margin_top = 18.0
+margin_right = 306.0
+margin_bottom = 50.0
+
+[node name="SpinBox" type="SpinBox" parent="VBox/Port/VBox/HBox"]
+margin_right = 244.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 65535.0
+value = 1.0
+
+[node name="CheckBox" type="CheckBox" parent="VBox/Port/VBox/HBox"]
+margin_left = 248.0
+margin_right = 306.0
+margin_bottom = 32.0
+text = "UPnP"
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+margin_top = 86.0
+margin_right = 320.0
+margin_bottom = 118.0
+rect_min_size = Vector2( 320, 0 )
+
+[node name="Back" type="Button" parent="VBox/HBox"]
+margin_right = 158.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+text = "Back"
+
+[node name="Host" type="Button" parent="VBox/HBox"]
+margin_left = 162.0
+margin_right = 320.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+text = "Host"

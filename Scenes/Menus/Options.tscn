@@ -1,0 +1,201 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Resources/MainTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Scripts/Scenes/Menus/Options.cs" type="Script" id=2]
+
+[node name="Options" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="VBox"]
+margin_right = 320.0
+margin_bottom = 14.0
+text = "Options"
+align = 1
+
+[node name="Username" type="PanelContainer" parent="VBox"]
+margin_top = 18.0
+margin_right = 320.0
+margin_bottom = 82.0
+rect_min_size = Vector2( 320, 0 )
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Username"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 313.0
+margin_bottom = 57.0
+
+[node name="Label" type="Label" parent="VBox/Username/VBox"]
+margin_right = 306.0
+margin_bottom = 14.0
+text = "Username"
+
+[node name="LineEdit" type="LineEdit" parent="VBox/Username/VBox"]
+margin_top = 18.0
+margin_right = 306.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Colour" type="PanelContainer" parent="VBox"]
+margin_top = 86.0
+margin_right = 320.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 320, 0 )
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Colour"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 313.0
+margin_bottom = 57.0
+
+[node name="Label" type="Label" parent="VBox/Colour/VBox"]
+margin_right = 306.0
+margin_bottom = 14.0
+text = "Colour"
+
+[node name="ColorPicker" type="ColorPickerButton" parent="VBox/Colour/VBox"]
+margin_top = 18.0
+margin_right = 306.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 32 )
+edit_alpha = false
+
+[node name="Sensitivity" type="PanelContainer" parent="VBox"]
+margin_top = 154.0
+margin_right = 320.0
+margin_bottom = 218.0
+rect_min_size = Vector2( 320, 0 )
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Sensitivity"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 313.0
+margin_bottom = 57.0
+
+[node name="Label" type="Label" parent="VBox/Sensitivity/VBox"]
+margin_right = 306.0
+margin_bottom = 14.0
+text = "Sensitivity"
+
+[node name="HBox" type="HBoxContainer" parent="VBox/Sensitivity/VBox"]
+margin_top = 18.0
+margin_right = 306.0
+margin_bottom = 50.0
+
+[node name="Label1" type="Label" parent="VBox/Sensitivity/VBox/HBox"]
+margin_top = 9.0
+margin_right = 8.0
+margin_bottom = 23.0
+custom_colors/font_color = Color( 0.7, 0.7, 0.7, 1 )
+text = "X"
+
+[node name="X" type="SpinBox" parent="VBox/Sensitivity/VBox/HBox"]
+margin_left = 12.0
+margin_right = 151.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.1
+
+[node name="Label2" type="Label" parent="VBox/Sensitivity/VBox/HBox"]
+margin_left = 155.0
+margin_top = 9.0
+margin_right = 163.0
+margin_bottom = 23.0
+custom_colors/font_color = Color( 0.7, 0.7, 0.7, 1 )
+text = "Y"
+
+[node name="Y" type="SpinBox" parent="VBox/Sensitivity/VBox/HBox"]
+margin_left = 167.0
+margin_right = 306.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.1
+
+[node name="Fov" type="PanelContainer" parent="VBox"]
+margin_top = 222.0
+margin_right = 320.0
+margin_bottom = 286.0
+rect_min_size = Vector2( 320, 0 )
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Fov"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 313.0
+margin_bottom = 57.0
+
+[node name="Label" type="Label" parent="VBox/Fov/VBox"]
+margin_right = 306.0
+margin_bottom = 14.0
+text = "FOV"
+
+[node name="HBox" type="HBoxContainer" parent="VBox/Fov/VBox"]
+margin_top = 18.0
+margin_right = 306.0
+margin_bottom = 50.0
+
+[node name="Label1" type="Label" parent="VBox/Fov/VBox/HBox"]
+margin_top = 9.0
+margin_right = 8.0
+margin_bottom = 23.0
+custom_colors/font_color = Color( 0.7, 0.7, 0.7, 1 )
+text = "X"
+
+[node name="X" type="SpinBox" parent="VBox/Fov/VBox/HBox"]
+margin_left = 12.0
+margin_right = 151.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+min_value = 70.0
+max_value = 120.0
+value = 70.0
+
+[node name="Label2" type="Label" parent="VBox/Fov/VBox/HBox"]
+margin_left = 155.0
+margin_top = 9.0
+margin_right = 163.0
+margin_bottom = 23.0
+custom_colors/font_color = Color( 0.7, 0.7, 0.7, 1 )
+text = "Y"
+
+[node name="Y" type="SpinBox" parent="VBox/Fov/VBox/HBox"]
+margin_left = 167.0
+margin_right = 306.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+min_value = 70.0
+max_value = 120.0
+value = 70.0
+
+[node name="Back" type="Button" parent="VBox"]
+margin_top = 290.0
+margin_right = 320.0
+margin_bottom = 322.0
+rect_min_size = Vector2( 320, 32 )
+text = "Back"
