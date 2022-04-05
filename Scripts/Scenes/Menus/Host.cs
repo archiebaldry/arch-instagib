@@ -47,7 +47,7 @@ public class Host : Control
 
         if (server != Error.Ok)
         {
-            _alert.Popup("Failed to create server", true);
+            _alert.Popup("Failed to create server", true, true);
             return;
         }
 

@@ -56,7 +56,7 @@ public class Join : Control
 
         if (client != Error.Ok)
         {
-            _alert.Popup("Failed to create client", true);
+            _alert.Popup("Failed to create client", true, true);
             return;
         }
 
@@ -82,7 +82,7 @@ public class Join : Control
         
         GetTree().Disconnect("connected_to_server", this, nameof(ConnectedToServer)); // Disconnect from 'connected_to_server'
         
-        _alert.Popup($"Failed to connect to server", true);
+        _alert.Popup($"Failed to connect to server", true, true);
     }
 
     private void ConnectedToServer()

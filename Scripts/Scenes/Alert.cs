@@ -15,21 +15,18 @@ public class Alert : ColorRect
         }
     }
 
-    public void Popup(string text, bool dismissible = false)
+    public void Popup(string text, bool dismissible = false, bool error = false)
     {
         _dismissible = dismissible;
         _lastFocusOwner = GetParent<Control>().GetFocusOwner(); // Store the element which last held focus before the alert
         
         Label label = GetNode<Label>("Label");
 
-        if (dismissible)
-        {
-            label.Text = text + "\n(click anywhere to hide)";
-        }
-        else
-        {
-            label.Text = text;
-        }
+        // If the alert is dismissible, add a dismiss message to the end of the text
+        label.Text = dismissible ? text + "\n(click anywhere to hide)" : text;
+
+        // If the alert is an error, make the text red
+        label.AddColorOverride("font_color", error ? Colors.Red : GetColor("font_color", "Label"));
 
         Visible = true;
         
