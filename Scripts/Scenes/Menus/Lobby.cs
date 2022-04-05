@@ -4,16 +4,19 @@ using Godot;
 public class Lobby : Control
 {
     // Node references
+    private Global _global;
     private RichTextLabel _playerList;
     private Button _start;
     
     public override void _Ready()
     {
         // Initialise node references
+        _global = GetNode<Global>("/root/Global");
         _playerList = GetNode<RichTextLabel>("VBox/Panel/PlayerList");
         _start = GetNode<Button>("VBox/HBox/Start");
         
         // Connect signals
+        _global.Connect(nameof(Global.PlayersUpdated), this, nameof(UpdatePlayerList));
         GetNode<Button>("VBox/HBox/Leave").Connect("pressed", this, nameof(LeavePressed));
         _start.Connect("pressed", this, nameof(StartPressed));
         
