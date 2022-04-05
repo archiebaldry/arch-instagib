@@ -23,7 +23,7 @@ public class Host : Control
         _upnp.Pressed = Global.Upnp;
     }
 
-    public void BackPressed()
+    private void BackPressed()
     {
         // Save fields to Global.cs
         Global.Port = (int) _port.Value;
@@ -32,7 +32,7 @@ public class Host : Control
         GetTree().ChangeScene("res://Scenes/Menus/Main.tscn");
     }
 
-    public void HostPressed()
+    private void HostPressed()
     {
         _alert.Popup("Attempting to host...");
         

@@ -11,22 +11,22 @@ public class Main : Control
         GetNode<Button>("VBox/Quit").Connect("pressed", this, nameof(QuitPressed));
     }
 
-    public void HostPressed()
+    private void HostPressed()
     {
         GetTree().ChangeScene("res://Scenes/Menus/Host.tscn");
     }
 
-    public void JoinPressed()
+    private void JoinPressed()
     {
         GetTree().ChangeScene("res://Scenes/Menus/Join.tscn");
     }
 
-    public void OptionsPressed()
+    private void OptionsPressed()
     {
         GetTree().ChangeScene("res://Scenes/Menus/Options.tscn");
     }
 
-    public void QuitPressed()
+    private void QuitPressed()
     {
         GetTree().Quit();
     }

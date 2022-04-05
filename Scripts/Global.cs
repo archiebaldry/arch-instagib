@@ -28,7 +28,7 @@ public class Global : Node
     }
 
     [Remote]
-    public void ReceiveClientInfo(string username, Color colour)
+    private void ReceiveClientInfo(string username, Color colour)
     {
         int newPlayerId = GetTree().GetRpcSenderId();
         
@@ -46,7 +46,7 @@ public class Global : Node
     }
 
     [Remote]
-    public void AddPlayer(int id, string username, Color colour)
+    private void AddPlayer(int id, string username, Color colour)
     {
         Players.Add(id, new Peer(id, username, colour)); // Add the player information to Players
         

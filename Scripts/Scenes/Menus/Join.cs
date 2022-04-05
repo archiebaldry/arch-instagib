@@ -28,7 +28,7 @@ public class Join : Control
         _upnp.Pressed = Global.Upnp;
     }
 
-    public void BackPressed()
+    private void BackPressed()
     {
         // Save fields to Global.cs
         Global.Address = _address.Text;
@@ -38,7 +38,7 @@ public class Join : Control
         GetTree().ChangeScene("res://Scenes/Menus/Main.tscn");
     }
 
-    public void JoinPressed()
+    private void JoinPressed()
     {
         _alert.Popup("Attempting to join...");
         

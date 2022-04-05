@@ -42,7 +42,7 @@ public class Lobby : Control
         _start.Disabled = !(GetTree().IsNetworkServer() && Global.Players.Count > 1);
     }
     
-    public void LeavePressed()
+    private void LeavePressed()
     {
         bool networkServer = GetTree().IsNetworkServer();
         
@@ -54,7 +54,7 @@ public class Lobby : Control
         GetTree().ChangeScene(networkServer ? "res://Scenes/Menus/Host.tscn" : "res://Scenes/Menus/Join.tscn");
     }
 
-    public void StartPressed()
+    private void StartPressed()
     {
         
     }

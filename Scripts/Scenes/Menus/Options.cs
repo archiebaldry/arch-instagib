@@ -32,7 +32,7 @@ public class Options : Control
         _fovY.Value = Global.Fov.y;
     }
 
-    public void BackPressed()
+    private void BackPressed()
     {
         // Save fields to Global.cs
         Global.Username = _username.Text;
