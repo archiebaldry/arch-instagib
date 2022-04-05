@@ -8,7 +8,7 @@ public class Alert : ColorRect
     // Private variables
     private Control _lastFocusOwner; // Which element held the focus of the scene before the alert?
 
-    public override void _UnhandledInput(InputEvent @event)
+    public override void _Input(InputEvent @event)
     {
         if (@event.IsAction("hide_alert") && Dismissable)
         {
@@ -22,8 +22,18 @@ public class Alert : ColorRect
     {
         _lastFocusOwner = GetParent<Control>().GetFocusOwner(); // Store the element which last held focus before the alert
         
-        GetNode<Label>("Label").Text = text;
+        Label label = GetNode<Label>("Label");
 
+        if (dismissable)
+        {
+            label.Text = text + "\n(click anywhere to hide)";
+        }
+        else
+        {
+            label.Text = text;
+        }
+
+        Dismissable = dismissable;
         Visible = true;
         
         GrabFocus(); // Take the focus of the scene
