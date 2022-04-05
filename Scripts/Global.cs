@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System.Collections.Generic;
+using Godot;
 
 public class Global
 {
@@ -9,7 +10,10 @@ public class Global
     public static Vector2 Fov = new Vector2(90, 90);
     
     // Host and Join
+    public const string DefaultAddress = "127.0.0.1";
     public static string Address = "";
     public static int Port = 2710;
     public static bool Upnp = false;
+
+    public static readonly Dictionary<int, Peer> Players = new Dictionary<int, Peer>(); // Holds information of every player in the server
 }

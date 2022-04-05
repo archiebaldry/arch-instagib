@@ -39,5 +39,23 @@ public class Host : Control
         // Save fields to Global.cs
         Global.Port = (int) _port.Value;
         Global.Upnp = _upnp.Pressed;
+        
+        // Create a server
+        NetworkedMultiplayerENet eNet = new NetworkedMultiplayerENet();
+        
+        Error server = eNet.CreateServer(Global.Port);
+
+        if (server != Error.Ok)
+        {
+            _alert.Popup("Failed to host server");
+            return;
+        }
+
+        GetTree().NetworkPeer = eNet; // Set the tree's network peer to our server
+        
+        Global.Players.Clear(); // Clear any player information left behind from previous session
+        Global.Players.Add(1, new Peer(1, Global.Username, Global.Colour)); // Add our info to Players
+        
+        GetTree().ChangeScene("res://Scenes/Menus/Lobby.tscn");
     }
 }

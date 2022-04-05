@@ -44,5 +44,22 @@ public class Join : Control
         Global.Address = _address.Text;
         Global.Port = (int) _port.Value;
         Global.Upnp = _upnp.Pressed;
+
+        // Create a client
+        NetworkedMultiplayerENet eNet = new NetworkedMultiplayerENet();
+        
+        string address = Global.Address.Empty() ? Global.DefaultAddress : Global.Address; // If the address field was left blank, use the default address from Global.cs
+        
+        Error client = eNet.CreateClient(address, Global.Port);
+
+        if (client != Error.Ok)
+        {
+            _alert.Popup("Failed to host client");
+            return;
+        }
+
+        GetTree().NetworkPeer = eNet; // Set the tree's network peer to our client
+
+        _alert.Popup("Connecting to server...", false);
     }
 }
