@@ -5,12 +5,14 @@ public class Host : Control
     // Node references
     private SpinBox _port;
     private CheckBox _upnp;
+    private Alert _alert;
     
     public override void _Ready()
     {
         // Initialise node references
         _port = GetNode<SpinBox>("VBox/Port/VBox/HBox/SpinBox");
         _upnp = GetNode<CheckBox>("VBox/Port/VBox/HBox/CheckBox");
+        _alert = GetNode<Alert>("Alert");
         
         // Connect signals
         GetNode<Button>("VBox/HBox/Back").Connect("pressed", this, nameof(BackPressed));
@@ -32,6 +34,8 @@ public class Host : Control
 
     public void HostPressed()
     {
+        _alert.Popup("Attempting to host...", false);
+        
         // Save fields to Global.cs
         Global.Port = (int) _port.Value;
         Global.Upnp = _upnp.Pressed;

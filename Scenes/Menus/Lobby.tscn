@@ -1,0 +1,69 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Scenes/Menus/Lobby.cs" type="Script" id=1]
+[ext_resource path="res://Resources/MainTheme.tres" type="Theme" id=2]
+
+[node name="Lobby" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="VBox"]
+margin_right = 320.0
+margin_bottom = 14.0
+text = "Lobby"
+align = 1
+
+[node name="Panel" type="PanelContainer" parent="VBox"]
+margin_top = 18.0
+margin_right = 320.0
+margin_bottom = 258.0
+rect_min_size = Vector2( 320, 240 )
+
+[node name="PlayerList" type="RichTextLabel" parent="VBox/Panel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 313.0
+margin_bottom = 233.0
+bbcode_enabled = true
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+margin_top = 262.0
+margin_right = 320.0
+margin_bottom = 294.0
+rect_min_size = Vector2( 320, 0 )
+
+[node name="Leave" type="Button" parent="VBox/HBox"]
+margin_right = 158.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+text = "Leave"
+
+[node name="Start" type="Button" parent="VBox/HBox"]
+margin_left = 162.0
+margin_right = 320.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+text = "Start"

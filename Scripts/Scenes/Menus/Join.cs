@@ -6,6 +6,7 @@ public class Join : Control
     private LineEdit _address;
     private SpinBox _port;
     private CheckBox _upnp;
+    private Alert _alert;
     
     public override void _Ready()
     {
@@ -13,6 +14,7 @@ public class Join : Control
         _address = GetNode<LineEdit>("VBox/Address/VBox/LineEdit");
         _port = GetNode<SpinBox>("VBox/Port/VBox/HBox/SpinBox");
         _upnp = GetNode<CheckBox>("VBox/Port/VBox/HBox/CheckBox");
+        _alert = GetNode<Alert>("Alert");
         
         // Connect signals
         GetNode<Button>("VBox/HBox/Back").Connect("pressed", this, nameof(BackPressed));
@@ -36,6 +38,8 @@ public class Join : Control
 
     public void JoinPressed()
     {
+        _alert.Popup("Attempting to join...", false);
+        
         // Save fields to Global.cs
         Global.Address = _address.Text;
         Global.Port = (int) _port.Value;
