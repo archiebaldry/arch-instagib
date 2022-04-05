@@ -38,7 +38,7 @@ public class Join : Control
 
     public void JoinPressed()
     {
-        _alert.Popup("Attempting to join...", false);
+        _alert.Popup("Attempting to join...");
         
         // Save fields to Global.cs
         Global.Address = _address.Text;
@@ -54,12 +54,12 @@ public class Join : Control
 
         if (client != Error.Ok)
         {
-            _alert.Popup("Failed to host client");
+            _alert.Popup("Failed to create client", true);
             return;
         }
 
         GetTree().NetworkPeer = eNet; // Set the tree's network peer to our client
 
-        _alert.Popup("Connecting to server...", false);
+        _alert.Popup("Connecting to server...");
     }
 }

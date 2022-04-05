@@ -34,7 +34,7 @@ public class Host : Control
 
     public void HostPressed()
     {
-        _alert.Popup("Attempting to host...", false);
+        _alert.Popup("Attempting to host...");
         
         // Save fields to Global.cs
         Global.Port = (int) _port.Value;
@@ -47,7 +47,7 @@ public class Host : Control
 
         if (server != Error.Ok)
         {
-            _alert.Popup("Failed to host server");
+            _alert.Popup("Failed to create server", true);
             return;
         }
 

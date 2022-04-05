@@ -3,14 +3,14 @@ using Godot;
 public class Alert : ColorRect
 {
     // Public variables
-    public bool Dismissable = false; // Can this alert be dismissed?
+    public bool Dismissible = false; // Can this alert be dismissed?
 
     // Private variables
     private Control _lastFocusOwner; // Which element held the focus of the scene before the alert?
 
     public override void _Input(InputEvent @event)
     {
-        if (@event.IsAction("hide_alert") && Dismissable)
+        if (@event.IsAction("hide_alert") && Dismissible)
         {
             Visible = false;
             
@@ -18,13 +18,13 @@ public class Alert : ColorRect
         }
     }
 
-    public void Popup(string text, bool dismissable = true)
+    public void Popup(string text, bool dismissible = false)
     {
         _lastFocusOwner = GetParent<Control>().GetFocusOwner(); // Store the element which last held focus before the alert
         
         Label label = GetNode<Label>("Label");
 
-        if (dismissable)
+        if (dismissible)
         {
             label.Text = text + "\n(click anywhere to hide)";
         }
@@ -33,7 +33,7 @@ public class Alert : ColorRect
             label.Text = text;
         }
 
-        Dismissable = dismissable;
+        Dismissible = dismissible;
         Visible = true;
         
         GrabFocus(); // Take the focus of the scene
