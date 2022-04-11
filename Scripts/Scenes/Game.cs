@@ -11,11 +11,18 @@ public class Game : Spatial
             // If we are this player
             if (peer.Id == GetTree().GetNetworkUniqueId())
             {
+                // Get instance of our Player scene
                 player = (KinematicBody) GD.Load<PackedScene>("res://Scenes/Player.tscn").Instance();
+                
+                // Set the camera fov to our global value
+                // We cannot use our SetFov method as this relies on the Ready method
+                // and our Player instance has not been added to the scene tree yet.
+                player.GetNode<Camera>("Camera").Fov = Global.Fov;
             }
             // If this is another client on the network
             else
             {
+                // Get instance of our Puppet scene
                 player = (Area) GD.Load<PackedScene>("res://Scenes/Puppet.tscn").Instance();
             }
             
