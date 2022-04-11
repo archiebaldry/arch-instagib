@@ -21,8 +21,8 @@ public class Options : Control
         _fovY = GetNode<SpinBox>("VBox/Fov/VBox/HBox/Y");
         
         // Connect signals
-        GetNode<Button>("VBox/Back").Connect("pressed", this, nameof(BackPressed));
-        GetNode<Button>("VBox/Save").Connect("pressed", this, nameof(SavePressed));
+        GetNode<Button>("VBox/HBox/Back").Connect("pressed", this, nameof(BackPressed));
+        GetNode<Button>("VBox/HBox/Save").Connect("pressed", this, nameof(SavePressed));
         
         // Populate fields from Global.cs
         _username.Text = Global.Username;
