@@ -19,6 +19,9 @@ public class Game : Spatial
                 player = (Area) GD.Load<PackedScene>("res://Scenes/Puppet.tscn").Instance();
             }
             
+            // Set their name to the owner's id
+            player.Name = peer.Id.ToString();
+            
             // Set their position to the one found in Global.cs Players
             player.GlobalTransform = new Transform(Basis.Identity, peer.Position);
             

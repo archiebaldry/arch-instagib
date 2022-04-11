@@ -58,4 +58,13 @@ public class Global : Node
             GetTree().ChangeScene("res://Scenes/Menus/Lobby.tscn");
         }
     }
+
+    [Remote]
+    public void SetPlayerPosition(Vector3 position)
+    {
+        int id = GetTree().GetRpcSenderId(); // Get the id of the player who's moved
+
+        // Set the player's position to the position passed in the function
+        GetTree().Root.GetNode<Area>("Game/" + id).GlobalTransform = new Transform(Basis.Identity, position);
+    }
 }
