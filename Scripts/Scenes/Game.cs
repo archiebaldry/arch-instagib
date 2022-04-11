@@ -4,6 +4,10 @@ public class Game : Spatial
 {
     public override void _Ready()
     {
+        // Capture the mouse
+        Input.SetMouseMode(Input.MouseMode.Captured);
+        
+        // Spawn the players
         foreach (Peer peer in Global.Players.Values)
         {
             CollisionObject player;

@@ -34,18 +34,15 @@ public class PauseMenu : ColorRect
         // Resume
         if (Visible)
         {
-            Global.GamePaused = false;
-            
-            // Revert player's fov back to global value
-            SetPlayerFov(Global.Fov);
-            
-            Visible = false; // Hide pause menu
+            SetPlayerFov(Global.Fov); // Revert player's fov back to global value
+            ResumePressed(); // Resume the game
         }
         
         // Pause
         else
         {
             Global.GamePaused = true;
+            Input.SetMouseMode(Input.MouseMode.Visible);
             
             _main.Visible = true; // Show main buttons
             _options.Visible = false; // Hide options
@@ -57,6 +54,7 @@ public class PauseMenu : ColorRect
     private void ResumePressed()
     {
         Global.GamePaused = false;
+        Input.SetMouseMode(Input.MouseMode.Captured);
         
         // Hide pause menu
         Visible = false;
