@@ -116,8 +116,10 @@ margin_right = 151.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 size_flags_horizontal = 3
-max_value = 1.0
-step = 0.1
+min_value = 0.5
+max_value = 10.0
+step = 0.5
+value = 0.5
 
 [node name="Label2" type="Label" parent="VBox/Sensitivity/VBox/HBox"]
 margin_left = 155.0
@@ -133,8 +135,10 @@ margin_right = 306.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 size_flags_horizontal = 3
-max_value = 1.0
-step = 0.1
+min_value = 0.5
+max_value = 10.0
+step = 0.5
+value = 0.5
 
 [node name="Fov" type="PanelContainer" parent="VBox"]
 margin_top = 222.0

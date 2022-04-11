@@ -6,7 +6,12 @@ public class Global : Node
     // Options
     public static string Username = "Player";
     public static Color Colour = Colors.Red;
-    public static Vector2 Sensitivity = new Vector2(0.2F, 0.2F);
+    
+    // Visual scale: 0.5 to 10 (step 0.5)
+    // Actual scale: 0.01 to 0.2 (step 0.01)
+    // i.e. Actual = Visual x 0.02
+    public static Vector2 Sensitivity = new Vector2(3, 3); // Actual default is (0.06F, 0.06F)
+    
     public static int Fov = 70;
     
     // Host and Join
