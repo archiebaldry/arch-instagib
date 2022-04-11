@@ -139,64 +139,35 @@ step = 0.1
 [node name="Fov" type="PanelContainer" parent="VBox"]
 margin_top = 222.0
 margin_right = 320.0
-margin_bottom = 286.0
+margin_bottom = 270.0
 rect_min_size = Vector2( 320, 0 )
 
 [node name="VBox" type="VBoxContainer" parent="VBox/Fov"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 313.0
-margin_bottom = 57.0
+margin_bottom = 41.0
 
 [node name="Label" type="Label" parent="VBox/Fov/VBox"]
 margin_right = 306.0
 margin_bottom = 14.0
 text = "FOV"
 
-[node name="HBox" type="HBoxContainer" parent="VBox/Fov/VBox"]
+[node name="HSlider" type="HSlider" parent="VBox/Fov/VBox"]
 margin_top = 18.0
 margin_right = 306.0
-margin_bottom = 50.0
-
-[node name="Label1" type="Label" parent="VBox/Fov/VBox/HBox"]
-margin_top = 9.0
-margin_right = 8.0
-margin_bottom = 23.0
-custom_colors/font_color = Color( 0.7, 0.7, 0.7, 1 )
-text = "X"
-
-[node name="X" type="SpinBox" parent="VBox/Fov/VBox/HBox"]
-margin_left = 12.0
-margin_right = 151.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 0, 32 )
-size_flags_horizontal = 3
-min_value = 70.0
+margin_bottom = 34.0
+min_value = 60.0
 max_value = 120.0
-value = 70.0
-
-[node name="Label2" type="Label" parent="VBox/Fov/VBox/HBox"]
-margin_left = 155.0
-margin_top = 9.0
-margin_right = 163.0
-margin_bottom = 23.0
-custom_colors/font_color = Color( 0.7, 0.7, 0.7, 1 )
-text = "Y"
-
-[node name="Y" type="SpinBox" parent="VBox/Fov/VBox/HBox"]
-margin_left = 167.0
-margin_right = 306.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 0, 32 )
-size_flags_horizontal = 3
-min_value = 70.0
-max_value = 120.0
-value = 70.0
+step = 5.0
+value = 60.0
+tick_count = 13
+ticks_on_borders = true
 
 [node name="HBox" type="HBoxContainer" parent="VBox"]
-margin_top = 290.0
+margin_top = 274.0
 margin_right = 320.0
-margin_bottom = 322.0
+margin_bottom = 306.0
 rect_min_size = Vector2( 320, 0 )
 
 [node name="Back" type="Button" parent="VBox/HBox"]

@@ -7,7 +7,7 @@ public class Global : Node
     public static string Username = "Player";
     public static Color Colour = Colors.Red;
     public static Vector2 Sensitivity = new Vector2(0.2F, 0.2F);
-    public static Vector2 Fov = new Vector2(90, 90);
+    public static int Fov = 70;
     
     // Host and Join
     public const string DefaultAddress = "127.0.0.1";
