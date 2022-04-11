@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public class Lobby : Control
@@ -56,6 +55,14 @@ public class Lobby : Control
 
     private void StartPressed()
     {
-        
+        GetTree().RefuseNewNetworkConnections = true; // Stop new players from joining
+
+        Rpc(nameof(StartGame)); // Tell everyone on the network to call StartGame(), including the server
+    }
+
+    [RemoteSync]
+    private void StartGame()
+    {
+        GetTree().ChangeScene("res://Scenes/Game.tscn"); // Change our scene to the game scene
     }
 }
