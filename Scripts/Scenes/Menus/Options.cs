@@ -22,6 +22,7 @@ public class Options : Control
         
         // Connect signals
         GetNode<Button>("VBox/Back").Connect("pressed", this, nameof(BackPressed));
+        GetNode<Button>("VBox/Save").Connect("pressed", this, nameof(SavePressed));
         
         // Populate fields from Global.cs
         _username.Text = Global.Username;
@@ -34,6 +35,12 @@ public class Options : Control
 
     private void BackPressed()
     {
+        // Go back to the main menu
+        GetTree().ChangeScene("res://Scenes/Menus/Main.tscn");
+    }
+
+    private void SavePressed()
+    {
         // Save fields to Global.cs
         Global.Username = _username.Text;
         Global.Colour = _colour.Color;
@@ -42,6 +49,6 @@ public class Options : Control
         Global.Fov.x = (float) _fovX.Value;
         Global.Fov.y = (float) _fovY.Value;
         
-        GetTree().ChangeScene("res://Scenes/Menus/Main.tscn");
+        BackPressed();
     }
 }
