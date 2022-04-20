@@ -1,31 +1,22 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Resources/Materials/Ground.tres" type="Material" id=1]
-[ext_resource path="res://Resources/Materials/RedWall.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/Scenes/Game.cs" type="Script" id=3]
 [ext_resource path="res://Resources/MainTheme.tres" type="Theme" id=4]
 [ext_resource path="res://Scripts/Scenes/PauseMenu.cs" type="Script" id=5]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 16, 0.5, 16 )
+[sub_resource type="CylinderShape" id=1]
+radius = 32.0
+height = 1.0
 
-[sub_resource type="CubeMesh" id=2]
-material = ExtResource( 1 )
-size = Vector3( 32, 1, 32 )
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.1, 0.1, 0.1, 1 )
 
-[sub_resource type="BoxShape" id=3]
-extents = Vector3( 14, 1, 1 )
-
-[sub_resource type="CubeMesh" id=4]
-material = ExtResource( 2 )
-size = Vector3( 28, 2, 2 )
-
-[sub_resource type="BoxShape" id=5]
-extents = Vector3( 1, 1, 12 )
-
-[sub_resource type="CubeMesh" id=6]
-material = ExtResource( 2 )
-size = Vector3( 2, 2, 24 )
+[sub_resource type="CylinderMesh" id=2]
+material = SubResource( 3 )
+top_radius = 32.0
+bottom_radius = 32.0
+height = 1.0
+radial_segments = 128
 
 [node name="Game" type="Spatial"]
 script = ExtResource( 3 )
@@ -40,49 +31,9 @@ shape = SubResource( 1 )
 mesh = SubResource( 2 )
 material/0 = null
 
-[node name="RedWall1" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 13 )
-
-[node name="CollisionShape" type="CollisionShape" parent="RedWall1"]
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="RedWall1/CollisionShape"]
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="RedWall2" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 1, 0 )
-
-[node name="CollisionShape" type="CollisionShape" parent="RedWall2"]
-shape = SubResource( 5 )
-
-[node name="MeshInstance" type="MeshInstance" parent="RedWall2/CollisionShape"]
-mesh = SubResource( 6 )
-material/0 = null
-
-[node name="RedWall3" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -13 )
-
-[node name="CollisionShape" type="CollisionShape" parent="RedWall3"]
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="RedWall3/CollisionShape"]
-mesh = SubResource( 4 )
-material/0 = null
-
-[node name="RedWall4" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, 0 )
-
-[node name="CollisionShape" type="CollisionShape" parent="RedWall4"]
-shape = SubResource( 5 )
-
-[node name="MeshInstance" type="MeshInstance" parent="RedWall4/CollisionShape"]
-mesh = SubResource( 6 )
-material/0 = null
-
 [node name="Sun" type="DirectionalLight" parent="."]
 transform = Transform( 0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 10, 0 )
-light_color = Color( 0.968627, 0.921569, 0.733333, 1 )
+light_color = Color( 1, 0.95, 0.85, 1 )
 shadow_enabled = true
 directional_shadow_split_1 = 0.05
 directional_shadow_split_2 = 0.1
