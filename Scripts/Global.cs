@@ -27,7 +27,17 @@ public class Global : Node
     // Signals
     [Signal]
     public delegate void PlayersUpdated(); // A signal used to tell the lobby that we have updated Players
-    
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        // If we press the fullscreen keybind
+        if (@event.IsActionPressed("fullscreen"))
+        {
+            // Flip the value of OS.WindowFullscreen to toggle fullscreen
+            OS.WindowFullscreen = !OS.WindowFullscreen;
+        }
+    }
+
     public void SendClientInfo()
     {
         RpcId(1, nameof(ReceiveClientInfo), Username, Colour);
