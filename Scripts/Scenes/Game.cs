@@ -2,8 +2,17 @@ using Godot;
 
 public class Game : Spatial
 {
+    // Node references
+    private Label _fps;
+    
     public override void _Ready()
     {
+        // Initalise node references
+        _fps = GetNode<Label>("UI/FPS");
+        
+        // Decide whether to show FPS indicator from Global.cs
+        _fps.Visible = Global.ShowFPS;
+        
         // Capture the mouse
         Input.SetMouseMode(Input.MouseMode.Captured);
         
@@ -37,5 +46,10 @@ public class Game : Spatial
             // Add the player to the scene
             AddChild(player);
         }
+    }
+
+    public override void _Process(float delta)
+    {
+        _fps.Text = Performance.GetMonitor(Performance.Monitor.TimeFps).ToString();
     }
 }

@@ -13,6 +13,8 @@ public class Global : Node
     public static Vector2 Sensitivity = new Vector2(3, 3); // Actual default is (0.06F, 0.06F)
     
     public static int Fov = 70;
+
+    public static bool ShowFPS = true;
     
     // Host and Join
     public const string DefaultAddress = "127.0.0.1";

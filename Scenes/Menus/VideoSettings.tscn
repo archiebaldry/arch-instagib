@@ -34,24 +34,24 @@ margin_bottom = 14.0
 text = "Video Settings"
 align = 1
 
-[node name="SharpenIntensity" type="PanelContainer" parent="VBox"]
+[node name="Sharpness" type="PanelContainer" parent="VBox"]
 margin_top = 18.0
 margin_right = 320.0
 margin_bottom = 82.0
 rect_min_size = Vector2( 320, 0 )
 
-[node name="VBox" type="VBoxContainer" parent="VBox/SharpenIntensity"]
+[node name="VBox" type="VBoxContainer" parent="VBox/Sharpness"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 313.0
 margin_bottom = 57.0
 
-[node name="Label" type="Label" parent="VBox/SharpenIntensity/VBox"]
+[node name="Label" type="Label" parent="VBox/Sharpness/VBox"]
 margin_right = 306.0
 margin_bottom = 14.0
-text = "Sharpen Intensity"
+text = "Sharpness"
 
-[node name="HSlider" type="HSlider" parent="VBox/SharpenIntensity/VBox"]
+[node name="HSlider" type="HSlider" parent="VBox/Sharpness/VBox"]
 margin_top = 18.0
 margin_right = 306.0
 margin_bottom = 50.0
@@ -113,10 +113,36 @@ margin_right = 313.0
 margin_bottom = 47.0
 text = "Fullscreen"
 
-[node name="HBox" type="HBoxContainer" parent="VBox"]
+[node name="VSync" type="PanelContainer" parent="VBox"]
 margin_top = 270.0
 margin_right = 320.0
-margin_bottom = 302.0
+margin_bottom = 324.0
+rect_min_size = Vector2( 320, 0 )
+
+[node name="CheckButton" type="CheckButton" parent="VBox/VSync"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 313.0
+margin_bottom = 47.0
+text = "VSync"
+
+[node name="FPS" type="PanelContainer" parent="VBox"]
+margin_top = 328.0
+margin_right = 320.0
+margin_bottom = 382.0
+rect_min_size = Vector2( 320, 0 )
+
+[node name="CheckButton" type="CheckButton" parent="VBox/FPS"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 313.0
+margin_bottom = 47.0
+text = "FPS Indicator"
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+margin_top = 386.0
+margin_right = 320.0
+margin_bottom = 418.0
 rect_min_size = Vector2( 320, 0 )
 
 [node name="Back" type="Button" parent="VBox/HBox"]
