@@ -1,6 +1,6 @@
 using Godot;
 
-public class Options : Control
+public class GameSettings : Control
 {
     // Node references
     private LineEdit _username;
@@ -32,8 +32,8 @@ public class Options : Control
 
     private void BackPressed()
     {
-        // Go back to the main menu
-        GetTree().ChangeScene("res://Scenes/Menus/Main.tscn");
+        // Go back to settings
+        GetTree().ChangeScene("res://Scenes/Menus/Settings.tscn");
     }
 
     private void SavePressed()
