@@ -3,15 +3,25 @@ using Godot;
 public class Game : Spatial
 {
     // Node references
-    private Label _fps;
+    private Label _info;
+    private Leaderboard _leaderboard;
+    private RichTextLabel _killFeed;
+    private RichTextLabel _chatFeed;
+    private LineEdit _chatInput;
+    private Label _fpsIndicator;
     
     public override void _Ready()
     {
         // Initalise node references
-        _fps = GetNode<Label>("UI/FPS");
+        _info = GetNode<Label>("UI/VBox/Info/Label");
+        _leaderboard = GetNode<Leaderboard>("UI/VBox/Leaderboard");
+        _killFeed = GetNode<RichTextLabel>("UI/KillFeed");
+        _chatFeed = GetNode<RichTextLabel>("UI/Chat/Feed");
+        _chatInput = GetNode<LineEdit>("UI/Chat/Input");
+        _fpsIndicator = GetNode<Label>("UI/FpsIndicator");
         
         // Decide whether to show FPS indicator from Global.cs
-        _fps.Visible = Global.ShowFPS;
+        _fpsIndicator.Visible = Global.ShowFPS;
         
         // Capture the mouse
         Input.SetMouseMode(Input.MouseMode.Captured);
@@ -50,6 +60,6 @@ public class Game : Spatial
 
     public override void _Process(float delta)
     {
-        _fps.Text = Performance.GetMonitor(Performance.Monitor.TimeFps).ToString();
+        _fpsIndicator.Text = Performance.GetMonitor(Performance.Monitor.TimeFps).ToString();
     }
 }
