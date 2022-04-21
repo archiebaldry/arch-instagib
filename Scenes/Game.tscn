@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Resources/Kenney/Ground.tres" type="Material" id=1]
 [ext_resource path="res://Assets/Kenney/texture_01.svg" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Resources/MainTheme.tres" type="Theme" id=4]
 [ext_resource path="res://Scripts/Scenes/PauseMenu.cs" type="Script" id=5]
 [ext_resource path="res://Scenes/Puppet.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Resources/Stylebox.tres" type="StyleBox" id=8]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 32, 0.5, 32 )
@@ -128,10 +129,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -2.0
-margin_top = -2.0
-margin_right = 2.0
-margin_bottom = 2.0
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 1.0
+margin_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 1, 1, 1, 0.75 )
@@ -139,18 +140,341 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FPS" type="Label" parent="UI"]
+[node name="GameInfo" type="VBoxContainer" parent="UI"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ModeFragTime" type="PanelContainer" parent="UI/GameInfo"]
+margin_right = 108.0
+margin_bottom = 60.0
+size_flags_horizontal = 0
+custom_styles/panel = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/GameInfo/ModeFragTime"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 102.0
+margin_bottom = 54.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Deathmatch
+Frag Limit: 30
+Time Limit: 08:42"
+
+[node name="Leaderboard" type="PanelContainer" parent="UI/GameInfo"]
+margin_top = 64.0
+margin_right = 210.0
+margin_bottom = 144.0
+custom_styles/panel = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="UI/GameInfo/Leaderboard"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 204.0
+margin_bottom = 74.0
+
+[node name="Player1" type="HBoxContainer" parent="UI/GameInfo/Leaderboard/VBox"]
+margin_right = 198.0
+margin_bottom = 14.0
+
+[node name="Position" type="Label" parent="UI/GameInfo/Leaderboard/VBox/Player1"]
+margin_right = 20.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 20, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "1."
+clip_text = true
+
+[node name="Username" type="RichTextLabel" parent="UI/GameInfo/Leaderboard/VBox/Player1"]
+margin_left = 24.0
+margin_right = 124.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 100, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[color=green]Lizzard[/color]"
+text = "Lizzard"
+scroll_active = false
+
+[node name="Accuracy" type="Label" parent="UI/GameInfo/Leaderboard/VBox/Player1"]
+margin_left = 128.0
+margin_right = 164.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 36, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "36%"
+align = 1
+clip_text = true
+
+[node name="Frags" type="Label" parent="UI/GameInfo/Leaderboard/VBox/Player1"]
+margin_left = 168.0
+margin_right = 198.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 30, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "14"
+align = 1
+clip_text = true
+
+[node name="Player2" type="HBoxContainer" parent="UI/GameInfo/Leaderboard/VBox"]
+margin_top = 18.0
+margin_right = 198.0
+margin_bottom = 32.0
+
+[node name="Position" type="Label" parent="UI/GameInfo/Leaderboard/VBox/Player2"]
+margin_right = 20.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 20, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "2."
+clip_text = true
+
+[node name="Username" type="RichTextLabel" parent="UI/GameInfo/Leaderboard/VBox/Player2"]
+margin_left = 24.0
+margin_right = 124.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 100, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[color=aqua]Costa[/color]"
+text = "Costa"
+scroll_active = false
+
+[node name="Accuracy" type="Label" parent="UI/GameInfo/Leaderboard/VBox/Player2"]
+margin_left = 128.0
+margin_right = 164.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 36, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "27%"
+align = 1
+clip_text = true
+
+[node name="Frags" type="Label" parent="UI/GameInfo/Leaderboard/VBox/Player2"]
+margin_left = 168.0
+margin_right = 198.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 30, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "11"
+align = 1
+clip_text = true
+
+[node name="Player3" type="HBoxContainer" parent="UI/GameInfo/Leaderboard/VBox"]
+margin_top = 36.0
+margin_right = 198.0
+margin_bottom = 50.0
+
+[node name="Position" type="Label" parent="UI/GameInfo/Leaderboard/VBox/Player3"]
+margin_right = 20.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 20, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "3."
+clip_text = true
+
+[node name="Username" type="RichTextLabel" parent="UI/GameInfo/Leaderboard/VBox/Player3"]
+margin_left = 24.0
+margin_right = 124.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 100, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[color=red]Iason[/color]"
+text = "Iason"
+scroll_active = false
+
+[node name="Accuracy" type="Label" parent="UI/GameInfo/Leaderboard/VBox/Player3"]
+margin_left = 128.0
+margin_right = 164.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 36, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "14%"
+align = 1
+clip_text = true
+
+[node name="Frags" type="Label" parent="UI/GameInfo/Leaderboard/VBox/Player3"]
+margin_left = 168.0
+margin_right = 198.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 30, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "5"
+align = 1
+clip_text = true
+
+[node name="Player4" type="HBoxContainer" parent="UI/GameInfo/Leaderboard/VBox"]
+margin_top = 54.0
+margin_right = 198.0
+margin_bottom = 68.0
+
+[node name="Position" type="Label" parent="UI/GameInfo/Leaderboard/VBox/Player4"]
+margin_right = 20.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 20, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "4."
+clip_text = true
+
+[node name="Username" type="RichTextLabel" parent="UI/GameInfo/Leaderboard/VBox/Player4"]
+margin_left = 24.0
+margin_right = 124.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 100, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[color=#00CC00]Sape[/color]"
+text = "Sape"
+scroll_active = false
+
+[node name="Accuracy" type="Label" parent="UI/GameInfo/Leaderboard/VBox/Player4"]
+margin_left = 128.0
+margin_right = 164.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 36, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "19%"
+align = 1
+clip_text = true
+
+[node name="Frags" type="Label" parent="UI/GameInfo/Leaderboard/VBox/Player4"]
+margin_left = 168.0
+margin_right = 198.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 30, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "4"
+align = 1
+clip_text = true
+
+[node name="KillFeed" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -40.0
 margin_top = 8.0
 margin_right = -8.0
-margin_bottom = 14.0
+margin_bottom = 40.0
 grow_horizontal = 0
-custom_colors/font_color = Color( 0, 1, 0, 1 )
+rect_min_size = Vector2( 300, 150 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[right]Costa [color=red]X Lizzard X[/color]
+Costa [color=red]X Sape X[/color]
+Iason [color=red]X Flower_Child[AUT] X[/color]
+Jarronrat [color=red]X Kaizomario X[/color]
+Iason [color=red]X Costa X[/color]
+Lizzard [color=red]X Iason X[/color]
+Lizzard [color=red]X Sape X[/color]
+Jarronrat [color=red]X Flower_Child[AUT] X[/color][/right]"
+text = "Costa X Lizzard X
+Costa X Sape X
+Iason X Flower_Child[AUT] X
+Jarronrat X Kaizomario X
+Iason X Costa X
+Lizzard X Iason X
+Lizzard X Sape X
+Jarronrat X Flower_Child[AUT] X"
+scroll_active = false
+scroll_following = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Chat" type="VBoxContainer" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -40.0
+margin_right = 40.0
+margin_bottom = -8.0
+grow_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Feed" type="RichTextLabel" parent="UI/Chat"]
+margin_right = 300.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 300, 100 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_styles/normal = ExtResource( 8 )
+bbcode_enabled = true
+bbcode_text = "[color=aqua]Costa[/color]: gg
+[color=red]Kaizomario[/color]: gg
+[color=green]Lizzard[/color]: costa u lag^^
+[color=aqua]Costa[/color]: us server maybe?
+[color=green]Lizzard[/color]: is ur ping better on eu?
+[color=aqua]Costa[/color]: yes
+[color=aqua]Costa[/color]: the half
+[color=aqua]Costa[/color]: gg
+[color=red]Kaizomario[/color]: gg
+[color=green]Lizzard[/color]: costa u lag^^
+[color=aqua]Costa[/color]: us server maybe?
+[color=green]Lizzard[/color]: is ur ping better on eu?
+[color=aqua]Costa[/color]: yes
+[color=aqua]Costa[/color]: the half
+[color=aqua]Costa[/color]: gg
+[color=red]Kaizomario[/color]: gg
+[color=green]Lizzard[/color]: costa u lag^^
+[color=aqua]Costa[/color]: us server maybe?
+[color=green]Lizzard[/color]: is ur ping better on eu?
+[color=aqua]Costa[/color]: yes
+[color=aqua]Costa[/color]: the half"
+text = "Costa: gg
+Kaizomario: gg
+Lizzard: costa u lag^^
+Costa: us server maybe?
+Lizzard: is ur ping better on eu?
+Costa: yes
+Costa: the half
+Costa: gg
+Kaizomario: gg
+Lizzard: costa u lag^^
+Costa: us server maybe?
+Lizzard: is ur ping better on eu?
+Costa: yes
+Costa: the half
+Costa: gg
+Kaizomario: gg
+Lizzard: costa u lag^^
+Costa: us server maybe?
+Lizzard: is ur ping better on eu?
+Costa: yes
+Costa: the half"
+scroll_following = true
+
+[node name="Input" type="LineEdit" parent="UI/Chat"]
+margin_top = 104.0
+margin_right = 300.0
+margin_bottom = 130.0
+custom_styles/normal = ExtResource( 8 )
+
+[node name="FPS" type="Label" parent="UI"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -32.0
+margin_top = -22.0
+margin_right = -8.0
+margin_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "60"
 align = 2
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
