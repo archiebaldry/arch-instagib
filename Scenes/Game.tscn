@@ -1,22 +1,28 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://Resources/Kenney/Ground.tres" type="Material" id=1]
+[ext_resource path="res://Assets/Kenney/texture_01.svg" type="Texture" id=2]
 [ext_resource path="res://Scripts/Scenes/Game.cs" type="Script" id=3]
 [ext_resource path="res://Resources/MainTheme.tres" type="Theme" id=4]
 [ext_resource path="res://Scripts/Scenes/PauseMenu.cs" type="Script" id=5]
+[ext_resource path="res://Scenes/Puppet.tscn" type="PackedScene" id=6]
 
-[sub_resource type="CylinderShape" id=1]
-radius = 32.0
-height = 1.0
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 32, 0.5, 32 )
+
+[sub_resource type="CubeMesh" id=2]
+material = ExtResource( 1 )
+size = Vector3( 64, 1, 64 )
 
 [sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.1, 0.1, 0.1, 1 )
+albedo_color = Color( 1, 0, 0, 1 )
+albedo_texture = ExtResource( 2 )
+uv1_triplanar = true
 
-[sub_resource type="CylinderMesh" id=2]
-material = SubResource( 3 )
-top_radius = 32.0
-bottom_radius = 32.0
-height = 1.0
-radial_segments = 128
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 1, 0, 1, 1 )
+albedo_texture = ExtResource( 2 )
+uv1_triplanar = true
 
 [node name="Game" type="Spatial"]
 script = ExtResource( 3 )
@@ -30,6 +36,75 @@ shape = SubResource( 1 )
 [node name="MeshInstance" type="MeshInstance" parent="Ground/CollisionShape"]
 mesh = SubResource( 2 )
 material/0 = null
+
+[node name="Objects" type="CSGCombiner" parent="."]
+use_collision = true
+
+[node name="CSGBox" type="CSGBox" parent="Objects"]
+transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -10, 1, 18 )
+material = SubResource( 3 )
+
+[node name="CSGBox3" type="CSGBox" parent="Objects"]
+transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -14, 1, 12 )
+material = SubResource( 3 )
+
+[node name="CSGBox4" type="CSGBox" parent="Objects"]
+transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -9, 1, 13 )
+material = SubResource( 3 )
+
+[node name="CSGBox2" type="CSGBox" parent="Objects"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 2, 17 )
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 3 )
+
+[node name="CSGBox5" type="CSGBox" parent="Objects"]
+transform = Transform( 0, 0, -1, 0, 1, 0, 1, 0, 0, -18.786, 1, -8.32757 )
+material = SubResource( 4 )
+
+[node name="CSGBox6" type="CSGBox" parent="Objects"]
+transform = Transform( -0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, -11.9552, 1, -10.6384 )
+material = SubResource( 4 )
+
+[node name="CSGBox7" type="CSGBox" parent="Objects"]
+transform = Transform( -0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, -14.2152, 1, -6.06755 )
+material = SubResource( 4 )
+
+[node name="CSGBox8" type="CSGBox" parent="Objects"]
+transform = Transform( -0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, -16.7848, 2, -11.9325 )
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 4 )
+
+[node name="CSGBox9" type="CSGBox" parent="Objects"]
+transform = Transform( 1, 0, 4.37114e-08, 0, 1, 0, -4.37114e-08, 0, 1, -12.6982, 1, -14.5846 )
+material = SubResource( 4 )
+
+[node name="CSGBox10" type="CSGBox" parent="Objects"]
+transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -15.0089, 1, -21.4154 )
+material = SubResource( 4 )
+
+[node name="CSGBox11" type="CSGBox" parent="Objects"]
+transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -10.4381, 1, -19.1554 )
+material = SubResource( 4 )
+
+[node name="CSGBox12" type="CSGBox" parent="Objects"]
+transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -16.303, 2, -16.5858 )
+width = 4.0
+height = 4.0
+depth = 4.0
+material = SubResource( 4 )
+
+[node name="Puppet" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -7 )
+
+[node name="Puppet2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 6 )
+
+[node name="Puppet3" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 15 )
 
 [node name="Sun" type="DirectionalLight" parent="."]
 transform = Transform( 0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 10, 0 )

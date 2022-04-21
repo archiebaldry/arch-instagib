@@ -2,16 +2,14 @@
 
 [sub_resource type="CapsuleShape" id=7]
 radius = 0.4
-height = 0.8
 
 [sub_resource type="CapsuleMesh" id=8]
 radius = 0.4
-mid_height = 0.8
 
 [node name="Puppet" type="Area"]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.9, 0 )
 shape = SubResource( 7 )
 
 [node name="MeshInstance" type="MeshInstance" parent="CollisionShape"]
