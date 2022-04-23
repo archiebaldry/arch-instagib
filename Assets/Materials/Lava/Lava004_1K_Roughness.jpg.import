@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/texture_01.svg-c143b0acd70009c09fc13e07c680d00e.s3tc.stex"
-path.etc2="res://.import/texture_01.svg-c143b0acd70009c09fc13e07c680d00e.etc2.stex"
+path.s3tc="res://.import/Lava004_1K_Roughness.jpg-2dad86227287aca7ddadeba040dd183a.s3tc.stex"
+path.etc2="res://.import/Lava004_1K_Roughness.jpg-2dad86227287aca7ddadeba040dd183a.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Kenney/texture_01.svg"
-dest_files=[ "res://.import/texture_01.svg-c143b0acd70009c09fc13e07c680d00e.s3tc.stex", "res://.import/texture_01.svg-c143b0acd70009c09fc13e07c680d00e.etc2.stex" ]
+source_file="res://Assets/Materials/Lava/Lava004_1K_Roughness.jpg"
+dest_files=[ "res://.import/Lava004_1K_Roughness.jpg-2dad86227287aca7ddadeba040dd183a.s3tc.stex", "res://.import/Lava004_1K_Roughness.jpg-2dad86227287aca7ddadeba040dd183a.etc2.stex" ]
 
 [params]
 
@@ -25,7 +25,7 @@ flags/repeat=true
 flags/filter=true
 flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=1
+flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false

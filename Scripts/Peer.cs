@@ -6,7 +6,7 @@ public class Peer
     public readonly string Username;
     public readonly Color Colour;
 
-    public Vector3 Position = Vector3.Zero;
+    public Vector3 Position = new Vector3(0, 7, 0);
     public int Shots = 0;
     public int Frags = 0;
 
