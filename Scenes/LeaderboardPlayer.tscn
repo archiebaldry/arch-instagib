@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Scenes/LeaderboardPlayer.cs" type="Script" id=1]
+
+[node name="LeaderboardPlayer" type="HBoxContainer"]
+margin_right = 198.0
+margin_bottom = 14.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Position" type="Label" parent="."]
+margin_right = 20.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 20, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "1."
+clip_text = true
+
+[node name="Username" type="RichTextLabel" parent="."]
+margin_left = 24.0
+margin_right = 124.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 100, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[color=green]Lizzard[/color]"
+text = "Lizzard"
+scroll_active = false
+
+[node name="Accuracy" type="Label" parent="."]
+margin_left = 128.0
+margin_right = 164.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 36, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "36%"
+align = 1
+clip_text = true
+
+[node name="Frags" type="Label" parent="."]
+margin_left = 168.0
+margin_right = 198.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 30, 14 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "14"
+align = 1
+clip_text = true

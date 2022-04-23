@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Resources/Kenney/Ground.tres" type="Material" id=1]
 [ext_resource path="res://Assets/Kenney/texture_01.svg" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Puppet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/Scenes/Leaderboard.cs" type="Script" id=7]
 [ext_resource path="res://Resources/Stylebox.tres" type="StyleBox" id=8]
+[ext_resource path="res://Scenes/LeaderboardPlayer.tscn" type="PackedScene" id=9]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 32, 0.5, 32 )
@@ -172,193 +173,20 @@ Time Limit: 08:42"
 [node name="Leaderboard" type="PanelContainer" parent="UI/VBox"]
 margin_top = 64.0
 margin_right = 210.0
-margin_bottom = 144.0
+margin_bottom = 90.0
 custom_styles/panel = ExtResource( 8 )
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBox" type="VBoxContainer" parent="UI/VBox/Leaderboard"]
+[node name="Players" type="VBoxContainer" parent="UI/VBox/Leaderboard"]
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 204.0
-margin_bottom = 74.0
+margin_bottom = 20.0
 
-[node name="Player1" type="HBoxContainer" parent="UI/VBox/Leaderboard/VBox"]
-margin_right = 198.0
-margin_bottom = 14.0
-
-[node name="Position" type="Label" parent="UI/VBox/Leaderboard/VBox/Player1"]
-margin_right = 20.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 20, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "1."
-clip_text = true
-
-[node name="Username" type="RichTextLabel" parent="UI/VBox/Leaderboard/VBox/Player1"]
-margin_left = 24.0
-margin_right = 124.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 100, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-bbcode_enabled = true
-bbcode_text = "[color=green]Lizzard[/color]"
-text = "Lizzard"
-scroll_active = false
-
-[node name="Accuracy" type="Label" parent="UI/VBox/Leaderboard/VBox/Player1"]
-margin_left = 128.0
-margin_right = 164.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 36, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "36%"
-align = 1
-clip_text = true
-
-[node name="Frags" type="Label" parent="UI/VBox/Leaderboard/VBox/Player1"]
-margin_left = 168.0
-margin_right = 198.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 30, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "14"
-align = 1
-clip_text = true
-
-[node name="Player2" type="HBoxContainer" parent="UI/VBox/Leaderboard/VBox"]
-margin_top = 18.0
-margin_right = 198.0
-margin_bottom = 32.0
-
-[node name="Position" type="Label" parent="UI/VBox/Leaderboard/VBox/Player2"]
-margin_right = 20.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 20, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "2."
-clip_text = true
-
-[node name="Username" type="RichTextLabel" parent="UI/VBox/Leaderboard/VBox/Player2"]
-margin_left = 24.0
-margin_right = 124.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 100, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-bbcode_enabled = true
-bbcode_text = "[color=aqua]Costa[/color]"
-text = "Costa"
-scroll_active = false
-
-[node name="Accuracy" type="Label" parent="UI/VBox/Leaderboard/VBox/Player2"]
-margin_left = 128.0
-margin_right = 164.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 36, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "27%"
-align = 1
-clip_text = true
-
-[node name="Frags" type="Label" parent="UI/VBox/Leaderboard/VBox/Player2"]
-margin_left = 168.0
-margin_right = 198.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 30, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "11"
-align = 1
-clip_text = true
-
-[node name="Player3" type="HBoxContainer" parent="UI/VBox/Leaderboard/VBox"]
-margin_top = 36.0
-margin_right = 198.0
-margin_bottom = 50.0
-
-[node name="Position" type="Label" parent="UI/VBox/Leaderboard/VBox/Player3"]
-margin_right = 20.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 20, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "3."
-clip_text = true
-
-[node name="Username" type="RichTextLabel" parent="UI/VBox/Leaderboard/VBox/Player3"]
-margin_left = 24.0
-margin_right = 124.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 100, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-bbcode_enabled = true
-bbcode_text = "[color=red]Iason[/color]"
-text = "Iason"
-scroll_active = false
-
-[node name="Accuracy" type="Label" parent="UI/VBox/Leaderboard/VBox/Player3"]
-margin_left = 128.0
-margin_right = 164.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 36, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "14%"
-align = 1
-clip_text = true
-
-[node name="Frags" type="Label" parent="UI/VBox/Leaderboard/VBox/Player3"]
-margin_left = 168.0
-margin_right = 198.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 30, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "5"
-align = 1
-clip_text = true
-
-[node name="Player4" type="HBoxContainer" parent="UI/VBox/Leaderboard/VBox"]
-margin_top = 54.0
-margin_right = 198.0
-margin_bottom = 68.0
-
-[node name="Position" type="Label" parent="UI/VBox/Leaderboard/VBox/Player4"]
-margin_right = 20.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 20, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "4."
-clip_text = true
-
-[node name="Username" type="RichTextLabel" parent="UI/VBox/Leaderboard/VBox/Player4"]
-margin_left = 24.0
-margin_right = 124.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 100, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-bbcode_enabled = true
-bbcode_text = "[color=#00CC00]Sape[/color]"
-text = "Sape"
-scroll_active = false
-
-[node name="Accuracy" type="Label" parent="UI/VBox/Leaderboard/VBox/Player4"]
-margin_left = 128.0
-margin_right = 164.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 36, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "19%"
-align = 1
-clip_text = true
-
-[node name="Frags" type="Label" parent="UI/VBox/Leaderboard/VBox/Player4"]
-margin_left = 168.0
-margin_right = 198.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 30, 14 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "4"
-align = 1
-clip_text = true
+[node name="Player" parent="UI/VBox/Leaderboard/Players" instance=ExtResource( 9 )]
 
 [node name="KillFeed" type="RichTextLabel" parent="UI"]
 anchor_left = 1.0
