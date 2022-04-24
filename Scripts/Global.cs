@@ -28,6 +28,7 @@ public class Global : Node
     public static readonly Dictionary<int, Peer> Players = new Dictionary<int, Peer>(); // Holds information of every player in the server
     public static bool GamePaused = false; // Is the game paused?
     public static float PanoCameraElapsed = 50;
+    public static float MenuMusicPosition = 0;
     
     // Signals
     [Signal]

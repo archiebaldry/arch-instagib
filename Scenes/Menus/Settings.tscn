@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Scenes/Menus/Settings.cs" type="Script" id=1]
 [ext_resource path="res://Resources/MainTheme.tres" type="Theme" id=2]
 [ext_resource path="res://Scenes/Blur.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Menus/Background.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Menus/Music.tscn" type="PackedScene" id=5]
 
 [node name="Settings" type="Control"]
 anchor_right = 1.0
@@ -67,3 +68,5 @@ margin_right = 320.0
 margin_bottom = 158.0
 rect_min_size = Vector2( 320, 32 )
 text = "Back"
+
+[node name="Music" parent="." instance=ExtResource( 5 )]

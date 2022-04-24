@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Resources/MainTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Scripts/Scenes/Menus/Host.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/Alert.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Blur.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Menus/Background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Menus/Music.tscn" type="PackedScene" id=6]
 
 [node name="Host" type="Control"]
 anchor_right = 1.0
@@ -101,3 +102,5 @@ text = "Host"
 
 [node name="Alert" parent="." instance=ExtResource( 3 )]
 visible = false
+
+[node name="Music" parent="." instance=ExtResource( 6 )]
