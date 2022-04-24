@@ -3,31 +3,76 @@ using Godot;
 public class Player : KinematicBody
 {
     // Private constants
-    private const int Speed = 5;
+    private const int Speed = 7;
+    private const int Acceleration = 7;
+    private const int AirAcceleration = 1;
+    private const float Gravity = 9.8F;
+    private const int Jump = 5;
+    
+    // Private variables
+    private int _acceleration;
+    private Vector2 _direction;
+    private Vector3 _velocity;
+    private Vector3 _snap;
+    private Vector3 _gravity;
+    private Vector3 _movement;
+    private Vector3 _moveResult;
     
     // Node references
     private Global _global;
     private Camera _camera;
+    private Label _debug;
 
     public override void _Ready()
     {
         // Initialise node references
         _global = GetNode<Global>("/root/Global");
         _camera = GetNode<Camera>("Camera");
+        _debug = GetNode<Label>("Debug");
+        
+        // Decide whether to show debug from Global.cs
+        _debug.Visible = Global.PlayerDebug;
+    }
+
+    public override void _Process(float delta)
+    {
+        _debug.Text = $"Acceleration: {_acceleration}\nDirection: {Vec2Str(_direction)}\nVelocity: {Vec3Str(_velocity)}\nSnap: {Vec3Str(_snap)}\nGravity: {Vec3Str(_gravity)}\nMovement: {Vec3Str(_movement)}\nMove Result: {Vec3Str(_moveResult)}";
     }
 
     public override void _PhysicsProcess(float delta)
     {
         // Get the direction of our keyboard input (W, A, S and D) and rotate it by the direction we are facing
-        Vector2 direction = Input.GetVector("move_left", "move_right", "move_forward", "move_back").Rotated(-Rotation.y);
+        _direction = Input.GetVector("move_left", "move_right", "move_forward", "move_back").Rotated(-Rotation.y);
         
-        Vector3 velocity = new Vector3(direction.x, 0, direction.y);
-        
-        // Move the player 
-        MoveAndSlide(velocity * Speed, Vector3.Up);
-        
+        if (IsOnFloor()) // We are on the ground
+        {
+            _snap = -GetFloorNormal();
+            _acceleration = Acceleration;
+            _gravity = Vector3.Zero;
+        }
+        else // We are in the air
+        {
+            _snap = Vector3.Down;
+            _acceleration = AirAcceleration;
+            _gravity += Vector3.Down * Gravity * delta;
+        }
+
+        // Handle jumping
+        if (Input.IsActionPressed("jump") && IsOnFloor())
+        {
+            _snap = Vector3.Zero;
+            _gravity = Vector3.Up * Jump;
+        }
+
+        // Calculate velocity and movement
+        _velocity = _velocity.LinearInterpolate(new Vector3(_direction.x, 0, _direction.y) * Speed, _acceleration * delta);
+        _movement = _velocity + _gravity;
+
+        // Apply movement
+        _moveResult = MoveAndSlideWithSnap(_movement, _snap, Vector3.Up);
+
         // Check if we actually moved
-        if (!velocity.Equals(Vector3.Zero))
+        if (!_movement.Equals(Vector3.Zero))
         {
             // Tell everyone on the network that we've moved and send them our position
             _global.RpcUnreliable(nameof(Global.SetPlayerPosition), GlobalTransform.origin);
@@ -50,5 +95,17 @@ public class Player : KinematicBody
         Vector3 headRotation = _camera.RotationDegrees;
         headRotation.x = Mathf.Clamp(headRotation.x, -89.0F, 89.0F);
         _camera.RotationDegrees = headRotation;
+    }
+    
+    private static string Vec2Str(Vector2 v)
+    {
+        // Return vector as string with X and Y rounded to 2 d.p.
+        return $"({v.x:0.##}, {v.y:0.##})";
+    }
+    
+    private static string Vec3Str(Vector3 v)
+    {
+        // Return vector as string with X, Y and Z rounded to 2 d.p.
+        return $"({v.x:0.##}, {v.y:0.##}, {v.z:0.##})";
     }
 }

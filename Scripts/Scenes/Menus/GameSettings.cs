@@ -8,6 +8,7 @@ public class GameSettings : Control
     private SpinBox _sensitivityX;
     private SpinBox _sensitivityY;
     private HSlider _fov;
+    private CheckButton _playerDebug;
     
     public override void _Ready()
     {
@@ -17,6 +18,7 @@ public class GameSettings : Control
         _sensitivityX = GetNode<SpinBox>("VBox/Sensitivity/VBox/HBox/X");
         _sensitivityY = GetNode<SpinBox>("VBox/Sensitivity/VBox/HBox/Y");
         _fov = GetNode<HSlider>("VBox/Fov/VBox/HSlider");
+        _playerDebug = GetNode<CheckButton>("VBox/PlayerDebug/CheckButton");
         
         // Connect signals
         GetNode<Button>("VBox/HBox/Back").Connect("pressed", this, nameof(BackPressed));
@@ -28,6 +30,7 @@ public class GameSettings : Control
         _sensitivityX.Value = Global.Sensitivity.x;
         _sensitivityY.Value = Global.Sensitivity.y;
         _fov.Value = Global.Fov;
+        _playerDebug.Pressed = Global.PlayerDebug;
     }
 
     private void BackPressed()
@@ -44,6 +47,7 @@ public class GameSettings : Control
         Global.Sensitivity.x = (float) _sensitivityX.Value;
         Global.Sensitivity.y = (float) _sensitivityY.Value;
         Global.Fov = (int) _fov.Value;
+        Global.PlayerDebug = _playerDebug.Pressed;
         
         BackPressed();
     }

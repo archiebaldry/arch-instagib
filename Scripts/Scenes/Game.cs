@@ -21,7 +21,7 @@ public class Game : Spatial
         _fpsIndicator = GetNode<Label>("UI/FpsIndicator");
         
         // Decide whether to show FPS indicator from Global.cs
-        _fpsIndicator.Visible = Global.ShowFPS;
+        _fpsIndicator.Visible = Global.FpsIndicator;
         
         // Capture the mouse
         Input.SetMouseMode(Input.MouseMode.Captured);

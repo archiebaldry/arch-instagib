@@ -168,10 +168,23 @@ value = 60.0
 tick_count = 13
 ticks_on_borders = true
 
-[node name="HBox" type="HBoxContainer" parent="VBox"]
+[node name="PlayerDebug" type="PanelContainer" parent="VBox"]
 margin_top = 274.0
 margin_right = 320.0
-margin_bottom = 306.0
+margin_bottom = 328.0
+rect_min_size = Vector2( 320, 0 )
+
+[node name="CheckButton" type="CheckButton" parent="VBox/PlayerDebug"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 313.0
+margin_bottom = 47.0
+text = "Player Debug"
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+margin_top = 332.0
+margin_right = 320.0
+margin_bottom = 364.0
 rect_min_size = Vector2( 320, 0 )
 
 [node name="Back" type="Button" parent="VBox/HBox"]

@@ -30,7 +30,7 @@ public class VideoSettings : Control
         _fxaa.Pressed = (bool) ProjectSettings.GetSetting("rendering/quality/filters/use_fxaa");
         _fullscreen.Pressed = OS.WindowFullscreen;
         _vsync.Pressed = OS.VsyncEnabled;
-        _fps.Pressed = Global.ShowFPS;
+        _fps.Pressed = Global.FpsIndicator;
     }
 
     private void BackPressed()
@@ -47,7 +47,7 @@ public class VideoSettings : Control
         ProjectSettings.SetSetting("rendering/quality/filters/use_fxaa", _fxaa.Pressed);
         OS.WindowFullscreen = _fullscreen.Pressed;
         OS.VsyncEnabled = _vsync.Pressed;
-        Global.ShowFPS = _fps.Pressed;
+        Global.FpsIndicator = _fps.Pressed;
         
         BackPressed();
     }

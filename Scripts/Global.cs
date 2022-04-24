@@ -3,26 +3,28 @@ using Godot;
 
 public class Global : Node
 {
-    // Options
+    // Game settings
     public static string Username = "Player";
     public static Color Colour = Colors.Red;
-    
+    public static Vector2 Sensitivity = new Vector2(3, 3);
+    // Actual default is (0.06F, 0.06F)
     // Visual scale: 0.5 to 10 (step 0.5)
     // Actual scale: 0.01 to 0.2 (step 0.01)
     // i.e. Actual = Visual x 0.02
-    public static Vector2 Sensitivity = new Vector2(3, 3); // Actual default is (0.06F, 0.06F)
-    
     public static int Fov = 70;
-
-    public static bool ShowFPS = true;
+    public static bool PlayerDebug = true;
     
-    // Host and Join
+    // Video settings
+    public static bool FpsIndicator = true;
+    
+    // Host/join constants and variables
     public const string DefaultAddress = "127.0.0.1";
     public const float ConnectionTimeout = 10F;
     public static string Address = "";
     public static int Port = 2710;
     public static bool Upnp = false;
 
+    // Other public variables
     public static readonly Dictionary<int, Peer> Players = new Dictionary<int, Peer>(); // Holds information of every player in the server
     public static bool GamePaused = false; // Is the game paused?
     
