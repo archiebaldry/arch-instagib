@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Resources/Stylebox.tres" type="StyleBox" id=1]
+[ext_resource path="res://Resources/MainTheme.tres" type="Theme" id=2]
+[ext_resource path="res://Scenes/Blur.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Menus/Background.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/Scenes/Menus/Credits.cs" type="Script" id=5]
+
+[node name="Credits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" parent="." instance=ExtResource( 4 )]
+
+[node name="Blur" parent="." instance=ExtResource( 3 )]
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="VBox"]
+margin_right = 320.0
+margin_bottom = 14.0
+text = "Credits"
+align = 1
+
+[node name="RichText" type="RichTextLabel" parent="VBox"]
+margin_top = 18.0
+margin_right = 320.0
+margin_bottom = 120.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_styles/normal = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "Arch Instagib was developed by Archie Baldry for his OCR A Level Computer Science NEA at Hellesdon High School.
+
+Design and development - [url=\\\"https://archiebaldry.xyz\"]Archie Baldry[/url]
+Font (Odibee Sans) - [url=\\\"https://barnard.co\"]James Barnard[/url]
+Prototype textures - [url=\\\"https://www.kenney.nl\"]Kenney[/url]"
+text = "Arch Instagib was developed by Archie Baldry for his OCR A Level Computer Science NEA at Hellesdon High School.
+
+Design and development - Archie Baldry
+Font (Odibee Sans) - James Barnard
+Prototype textures - Kenney"
+fit_content_height = true
+scroll_active = false
+
+[node name="Back" type="Button" parent="VBox"]
+margin_top = 124.0
+margin_right = 320.0
+margin_bottom = 156.0
+rect_min_size = Vector2( 320, 32 )
+text = "Back"
