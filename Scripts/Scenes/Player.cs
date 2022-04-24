@@ -41,8 +41,8 @@ public class Player : KinematicBody
 
     public override void _PhysicsProcess(float delta)
     {
-        // Get the direction of our keyboard input (W, A, S and D) and rotate it by the direction we are facing
-        _direction = Input.GetVector("move_left", "move_right", "move_forward", "move_back").Rotated(-Rotation.y);
+        // Provided the game is unpaused, get the direction of our keyboard input (W, A, S and D) and rotate it by the direction we are facing
+        _direction = Global.GamePaused ? Vector2.Zero : Input.GetVector("move_left", "move_right", "move_forward", "move_back").Rotated(-Rotation.y);
         
         if (IsOnFloor()) // We are on the ground
         {
@@ -58,7 +58,7 @@ public class Player : KinematicBody
         }
 
         // Handle jumping
-        if (Input.IsActionPressed("jump") && IsOnFloor())
+        if (!Global.GamePaused && Input.IsActionPressed("jump") && IsOnFloor())
         {
             _snap = Vector3.Zero;
             _gravity = Vector3.Up * Jump;
