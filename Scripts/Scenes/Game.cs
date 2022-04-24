@@ -31,7 +31,7 @@ public class Game : Spatial
         {
             CollisionObject player;
             
-            // If we are this player
+            // If we are this player (Player)
             if (peer.Id == GetTree().GetNetworkUniqueId())
             {
                 // Get instance of our Player scene
@@ -40,11 +40,20 @@ public class Game : Spatial
                 // Set the camera fov to our global value
                 player.GetNode<Camera>("Camera").Fov = Global.Fov;
             }
-            // If this is another client on the network
+            // If this is another client on the network (Puppet)
             else
             {
                 // Get instance of our Puppet scene
                 player = (Area) GD.Load<PackedScene>("res://Scenes/Puppet.tscn").Instance();
+
+                // Create a new material
+                Material material = new SpatialMaterial();
+                
+                // Set the material's colour to the peer's colour
+                material.Set("albedo_color", peer.Colour);
+                
+                // Apply the material to the puppet
+                player.GetNode<MeshInstance>("CollisionShape/MeshInstance").SetSurfaceMaterial(0, material);
             }
             
             // Set their name to the owner's id
