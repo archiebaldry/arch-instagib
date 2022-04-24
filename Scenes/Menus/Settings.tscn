@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Scenes/Menus/Settings.cs" type="Script" id=1]
 [ext_resource path="res://Resources/MainTheme.tres" type="Theme" id=2]
+[ext_resource path="res://Scenes/Blur.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Menus/Background.tscn" type="PackedScene" id=4]
 
 [node name="Settings" type="Control"]
 anchor_right = 1.0
@@ -11,6 +13,10 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Background" parent="." instance=ExtResource( 4 )]
+
+[node name="Blur" parent="." instance=ExtResource( 3 )]
 
 [node name="VBox" type="VBoxContainer" parent="."]
 anchor_left = 0.5
