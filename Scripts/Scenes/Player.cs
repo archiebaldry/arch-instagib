@@ -21,6 +21,7 @@ public class Player : KinematicBody
     // Node references
     private Global _global;
     private Camera _camera;
+    private RayCast _rayCast;
     private Label _debug;
 
     public override void _Ready()
@@ -28,6 +29,7 @@ public class Player : KinematicBody
         // Initialise node references
         _global = GetNode<Global>("/root/Global");
         _camera = GetNode<Camera>("Camera");
+        _rayCast = GetNode<RayCast>("Camera/RayCast");
         _debug = GetNode<Label>("Debug");
         
         // Decide whether to show debug from Global.cs
@@ -41,6 +43,31 @@ public class Player : KinematicBody
 
     public override void _PhysicsProcess(float delta)
     {
+        // SHOOTING
+
+        if (!Global.GamePaused && Input.IsActionJustPressed("fire"))
+        {
+            // Get the object colliding with our ray cast
+            Object collider = _rayCast.GetCollider();
+
+            // Hit
+            if (collider is Area area && area.IsInGroup("Puppets"))
+            {
+                int target = area.Name.ToInt();
+                
+                // Tell everyone on the network that we've made a frag
+                _global.Rpc(nameof(Global.PlayerShot), target);
+            }
+            // Miss
+            else
+            {
+                // Tell everyone on the network that we've taken a shot and missed
+                _global.Rpc(nameof(Global.PlayerShot), -1);
+            }
+        }
+        
+        // MOVEMENT
+        
         // Provided the game is unpaused, get the direction of our keyboard input (W, A, S and D) and rotate it by the direction we are facing
         _direction = Global.GamePaused ? Vector2.Zero : Input.GetVector("move_left", "move_right", "move_forward", "move_back").Rotated(-Rotation.y);
         

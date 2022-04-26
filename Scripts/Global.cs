@@ -34,6 +34,9 @@ public class Global : Node
     [Signal]
     public delegate void PlayersUpdated(); // A signal used to tell the lobby that we have updated Players
 
+    [Signal]
+    public delegate void PlayerStatsUpdated(); // A signal used to tell the leaderboard that a player's stats have changed
+
     public override void _UnhandledInput(InputEvent @event)
     {
         // If we press the fullscreen keybind
@@ -88,5 +91,37 @@ public class Global : Node
 
         // Set the player's position to the position passed in the function
         GetTree().Root.GetNode<Area>("Game/" + id).GlobalTransform = new Transform(Basis.Identity, position);
+    }
+
+    [RemoteSync]
+    public void RespawnPlayer()
+    {
+        int id = GetTree().GetRpcSenderId(); // Get the id of the player who needs respawning
+
+        // Set the player's position to the spawn position
+        GetTree().Root.GetNode<CollisionObject>("Game/" + id).GlobalTransform = new Transform(Basis.Identity, new Vector3(0, 7, 0));
+    } 
+
+    [RemoteSync]
+    public void PlayerShot(int target) // Ideally we'd use "target = -1" here but RPC doesn't handle it well
+    {
+        // We are the player that has been shot
+        if (target == GetTree().GetNetworkUniqueId())
+        {
+            // Tell everyone (including self) to respawn you
+            Rpc(nameof(RespawnPlayer));
+        }
+        
+        int shooter = GetTree().GetRpcSenderId(); // The shooter is the person who made the function call
+
+        Players[shooter].Shots += 1; // Increment shots
+
+        if (target != -1) // There was a target (i.e. it was a frag)
+        {
+            Players[shooter].Frags += 1; // Increment frags for shooter
+            Players[target].Deaths += 1; // Increment deaths for target
+        }
+        
+        EmitSignal(nameof(PlayerStatsUpdated)); // Tell everyone listening (i.e. the leaderboard) that player stats have changed
     }
 }

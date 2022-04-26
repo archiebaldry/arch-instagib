@@ -3,17 +3,19 @@ using Godot;
 
 public class Leaderboard : PanelContainer
 {
-    // Moving players up and down leaderboard
-    // Changing value of accuracy and frags
-    
     // Node references
+    private Global _global;
     private VBoxContainer _players;
     
     public override void _Ready()
     {
         // Initalise node references
+        _global = GetNode<Global>("/root/Global");
         _players = GetNode<VBoxContainer>("Players");
         
+        // Connect signals
+        _global.Connect(nameof(Global.PlayerStatsUpdated), this, nameof(UpdateBoard));
+
         UpdateBoard();
     }
 
