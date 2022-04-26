@@ -5,6 +5,8 @@ public class Host : Control
     // Node references
     private SpinBox _port;
     private CheckBox _upnp;
+    private SpinBox _fragLimit;
+    private SpinBox _timeLimit;
     private Alert _alert;
     
     public override void _Ready()
@@ -12,6 +14,8 @@ public class Host : Control
         // Initialise node references
         _port = GetNode<SpinBox>("VBox/Port/VBox/HBox/SpinBox");
         _upnp = GetNode<CheckBox>("VBox/Port/VBox/HBox/CheckBox");
+        _fragLimit = GetNode<SpinBox>("VBox/Limits/VBox/HBox/Frag");
+        _timeLimit = GetNode<SpinBox>("VBox/Limits/VBox/HBox/Time");
         _alert = GetNode<Alert>("Alert");
         
         // Connect signals
@@ -21,6 +25,8 @@ public class Host : Control
         // Populate fields from Global.cs
         _port.Value = Global.Port;
         _upnp.Pressed = Global.Upnp;
+        _fragLimit.Value = Global.FragLimit;
+        _timeLimit.Value = Global.TimeLimit;
     }
 
     private void BackPressed()
@@ -28,6 +34,8 @@ public class Host : Control
         // Save fields to Global.cs
         Global.Port = (int) _port.Value;
         Global.Upnp = _upnp.Pressed;
+        Global.FragLimit = (int) _fragLimit.Value;
+        Global.TimeLimit = (int) _timeLimit.Value;
         
         GetTree().ChangeScene("res://Scenes/Menus/Main.tscn");
     }
@@ -39,6 +47,8 @@ public class Host : Control
         // Save fields to Global.cs
         Global.Port = (int) _port.Value;
         Global.Upnp = _upnp.Pressed;
+        Global.FragLimit = (int) _fragLimit.Value;
+        Global.TimeLimit = (int) _timeLimit.Value;
         
         // Create a server
         NetworkedMultiplayerENet eNet = new NetworkedMultiplayerENet();

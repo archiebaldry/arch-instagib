@@ -23,6 +23,8 @@ public class Global : Node
     public static string Address = "";
     public static int Port = 2710;
     public static bool Upnp = false;
+    public static int FragLimit = 30;
+    public static int TimeLimit = 20;
 
     // Other public variables
     public static readonly Dictionary<int, Peer> Players = new Dictionary<int, Peer>(); // Holds information of every player in the server
@@ -62,6 +64,9 @@ public class Global : Node
         {
             RpcId(newPlayerId, nameof(AddPlayer), player.Id, player.Username, player.Colour);
         }
+        
+        // Send the new player the frag and time limits
+        RpcId(newPlayerId, nameof(SetLimits), FragLimit, TimeLimit);
         
         // Add the new player's information to the host's Players
         AddPlayer(newPlayerId, username, colour);
@@ -120,8 +125,40 @@ public class Global : Node
         {
             Players[shooter].Frags += 1; // Increment frags for shooter
             Players[target].Deaths += 1; // Increment deaths for target
+
+            if (Players[shooter].Frags == FragLimit) // GAME OVER! - player reached the frag limit
+            {
+                EndGame(0);
+            }
         }
         
         EmitSignal(nameof(PlayerStatsUpdated)); // Tell everyone listening (i.e. the leaderboard) that player stats have changed
+    }
+
+    [Remote]
+    public void SetLimits(int fragLimit, int timeLimit)
+    {
+        FragLimit = fragLimit;
+        TimeLimit = timeLimit;
+    }
+
+    public void Disconnect()
+    {
+        NetworkedMultiplayerENet eNet = (NetworkedMultiplayerENet) GetTree().NetworkPeer; // Get the ENet from the network peer
+        eNet.CloseConnection(); // Close our connection with the server
+        GetTree().NetworkPeer = null; // Clear our network peer
+        GetTree().ChangeScene("res://Scenes/Menus/Main.tscn"); // Send the player back to the main menu
+        Input.SetMouseMode(Input.MouseMode.Visible); // Make the mouse cursor visible
+    }
+
+    public void EndGame(int type)
+    {
+        // 0) Frag limit reached
+        // 1) Time limit reached
+        // 2) TODO: A player left the game
+        
+        GD.Print($"Game ended: reason {type}");
+        
+        Disconnect();
     }
 }

@@ -47,7 +47,7 @@ __meta__ = {
 }
 
 [node name="Info" type="PanelContainer" parent="UI/VBox"]
-margin_right = 108.0
+margin_right = 112.0
 margin_bottom = 60.0
 size_flags_horizontal = 0
 custom_styles/panel = ExtResource( 8 )
@@ -58,8 +58,9 @@ __meta__ = {
 [node name="Label" type="Label" parent="UI/VBox/Info"]
 margin_left = 6.0
 margin_top = 6.0
-margin_right = 102.0
+margin_right = 106.0
 margin_bottom = 54.0
+rect_min_size = Vector2( 100, 0 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Deathmatch
 Frag Limit: 30
@@ -387,3 +388,6 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 size_flags_horizontal = 3
 text = "Save"
+
+[node name="GameTimer" type="Timer" parent="."]
+one_shot = true

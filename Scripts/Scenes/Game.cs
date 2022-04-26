@@ -1,30 +1,44 @@
+using System;
 using Godot;
 
 public class Game : Spatial
 {
     // Node references
+    private Global _global;
     private Label _info;
     private Leaderboard _leaderboard;
     private RichTextLabel _killFeed;
     private RichTextLabel _chatFeed;
     private LineEdit _chatInput;
     private Label _fpsIndicator;
+    private Timer _gameTimer;
     
     public override void _Ready()
     {
         // Initalise node references
+        _global = GetNode<Global>("/root/Global");
         _info = GetNode<Label>("UI/VBox/Info/Label");
         _leaderboard = GetNode<Leaderboard>("UI/VBox/Leaderboard");
         _killFeed = GetNode<RichTextLabel>("UI/KillFeed");
         _chatFeed = GetNode<RichTextLabel>("UI/Chat/Feed");
         _chatInput = GetNode<LineEdit>("UI/Chat/Input");
         _fpsIndicator = GetNode<Label>("UI/FpsIndicator");
+        _gameTimer = GetNode<Timer>("GameTimer");
         
-        // Decide whether to show FPS indicator from Global.cs
-        _fpsIndicator.Visible = Global.FpsIndicator;
+        // Connect signals
+        _gameTimer.Connect("timeout", this, nameof(TimeLimitReached));
         
-        // Capture the mouse
-        Input.SetMouseMode(Input.MouseMode.Captured);
+        _fpsIndicator.Visible = Global.FpsIndicator; // Decide whether to show FPS indicator from Global.cs
+        
+        Input.SetMouseMode(Input.MouseMode.Captured); // Capture the mouse
+        
+        // Reset the global values
+        Global.GamePaused = false;
+        Global.PanoCameraElapsed = 50;
+        Global.MenuMusicPosition = 0;
+        
+        _gameTimer.WaitTime = Global.TimeLimit * 60; // Set our wait time to whatever's in Global.cs
+        _gameTimer.Start(); // Start the timer
         
         // Spawn the players
         foreach (Peer peer in Global.Players.Values)
@@ -69,6 +83,16 @@ public class Game : Spatial
 
     public override void _Process(float delta)
     {
+        // Update game info
+        TimeSpan timeLeft = TimeSpan.FromSeconds(_gameTimer.TimeLeft);
+        _info.Text = $"Deathmatch\nFrag Limit: {Global.FragLimit}\nTime Limit: {timeLeft:mm\\:ss}";
+        
+        // Update FPS indicator
         _fpsIndicator.Text = Performance.GetMonitor(Performance.Monitor.TimeFps).ToString();
+    }
+
+    private void TimeLimitReached()
+    {
+        _global.EndGame(1); // Tell Global.cs that the time limit has been reached and we should end the game
     }
 }

@@ -43,14 +43,7 @@ public class Lobby : Control
     
     private void LeavePressed()
     {
-        bool networkServer = GetTree().IsNetworkServer();
-        
-        NetworkedMultiplayerENet eNet = (NetworkedMultiplayerENet) GetTree().NetworkPeer; // Get the ENet from the network peer
-        eNet.CloseConnection(); // Close our connection with the server
-        GetTree().NetworkPeer = null; // Clear our network peer
-
-        // Send the host back to Host.tscn and send any clients to Join.tscn
-        GetTree().ChangeScene(networkServer ? "res://Scenes/Menus/Host.tscn" : "res://Scenes/Menus/Join.tscn");
+        _global.Disconnect(); // Tell Global.cs we wish to disconnect
     }
 
     private void StartPressed()

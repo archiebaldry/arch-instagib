@@ -2,6 +2,7 @@ using Godot;
 
 public class PauseMenu : ColorRect
 {
+    private Global _global;
     private VBoxContainer _main;
     private VBoxContainer _options;
     private SpinBox _sensitivityX;
@@ -11,6 +12,7 @@ public class PauseMenu : ColorRect
     public override void _Ready()
     {
         // Initialise node references
+        _global = GetNode<Global>("/root/Global");
         _main = GetNode<VBoxContainer>("Main");
         _options = GetNode<VBoxContainer>("Options");
         _sensitivityX = _options.GetNode<SpinBox>("Sensitivity/VBox/HBox/X");
@@ -73,7 +75,7 @@ public class PauseMenu : ColorRect
 
     private void DisconnectPressed()
     {
-        
+        _global.Disconnect(); // Tell Global.cs we wish to disconnect
     }
 
     private void BackPressed()

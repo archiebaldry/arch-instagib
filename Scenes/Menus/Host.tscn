@@ -79,10 +79,66 @@ margin_right = 306.0
 margin_bottom = 32.0
 text = "UPnP"
 
-[node name="HBox" type="HBoxContainer" parent="VBox"]
+[node name="Limits" type="PanelContainer" parent="VBox"]
 margin_top = 86.0
 margin_right = 320.0
-margin_bottom = 118.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 320, 0 )
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Limits"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 313.0
+margin_bottom = 57.0
+
+[node name="Label" type="Label" parent="VBox/Limits/VBox"]
+margin_right = 306.0
+margin_bottom = 14.0
+text = "Limits"
+
+[node name="HBox" type="HBoxContainer" parent="VBox/Limits/VBox"]
+margin_top = 18.0
+margin_right = 306.0
+margin_bottom = 50.0
+
+[node name="Label1" type="Label" parent="VBox/Limits/VBox/HBox"]
+margin_top = 9.0
+margin_right = 31.0
+margin_bottom = 23.0
+custom_colors/font_color = Color( 0.7, 0.7, 0.7, 1 )
+text = "Frags"
+
+[node name="Frag" type="SpinBox" parent="VBox/Limits/VBox/HBox"]
+margin_left = 35.0
+margin_right = 146.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+min_value = 1.0
+value = 1.0
+
+[node name="Label2" type="Label" parent="VBox/Limits/VBox/HBox"]
+margin_left = 150.0
+margin_top = 9.0
+margin_right = 190.0
+margin_bottom = 23.0
+custom_colors/font_color = Color( 0.7, 0.7, 0.7, 1 )
+text = "Minutes"
+
+[node name="Time" type="SpinBox" parent="VBox/Limits/VBox/HBox"]
+margin_left = 194.0
+margin_right = 306.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 90.0
+value = 1.0
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+margin_top = 154.0
+margin_right = 320.0
+margin_bottom = 186.0
 rect_min_size = Vector2( 320, 0 )
 
 [node name="Back" type="Button" parent="VBox/HBox"]
