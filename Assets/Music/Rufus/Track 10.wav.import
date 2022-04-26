@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Track 10.wav-11dd478c2c70523e5b4cb8df44e83a56.sample"
+
+[deps]
+
+source_file="res://Assets/Music/Rufus/Track 10.wav"
+dest_files=[ "res://.import/Track 10.wav-11dd478c2c70523e5b4cb8df44e83a56.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

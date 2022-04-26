@@ -45,29 +45,33 @@ align = 1
 [node name="RichText" type="RichTextLabel" parent="VBox"]
 margin_top = 18.0
 margin_right = 320.0
-margin_bottom = 135.0
+margin_bottom = 225.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_styles/normal = ExtResource( 1 )
 bbcode_enabled = true
-bbcode_text = "Arch Instagib was developed by Archie Baldry for his OCR A Level Computer Science NEA at Hellesdon High School.
+bbcode_text = "A 3D first-person arena shooter inspired by [url=\"https://store.steampowered.com/app/338170/Ratz_Instagib/\"]Ratz Instagib[/url]. Originally developed by Archie Baldry for his A Level Computer Science NEA. Built in the Godot Mono game engine and written in C#.
 
-Design and development - [url=\\\"https://archiebaldry.xyz\"]Archie Baldry[/url]
 Font (Odibee Sans) - [url=\\\"https://barnard.co\"]James Barnard[/url]
 Prototype textures - [url=\\\"https://www.kenney.nl\"]Kenney[/url]
-Menu music (Funky Boss) - [url=\"https://freemusicarchive.org/music/Lobo_Loco/\"]Lobo Loco[/url]"
-text = "Arch Instagib was developed by Archie Baldry for his OCR A Level Computer Science NEA at Hellesdon High School.
+Lava texture - [url=\"https://ambientcg.com/view?id=Lava004\"]ambientCG[/url]
+Menu music (Funky Boss) - [url=\"https://freemusicarchive.org/music/Lobo_Loco/\"]Lobo Loco[/url]
 
-Design and development - Archie Baldry
+All other music featured in Arch Instagib was mixed and produced by Rufus (my girlfriend's father) around the late 90s to early 2000s."
+text = "A 3D first-person arena shooter inspired by Ratz Instagib. Originally developed by Archie Baldry for his A Level Computer Science NEA. Built in the Godot Mono game engine and written in C#.
+
 Font (Odibee Sans) - James Barnard
 Prototype textures - Kenney
-Menu music (Funky Boss) - Lobo Loco"
+Lava texture - ambientCG
+Menu music (Funky Boss) - Lobo Loco
+
+All other music featured in Arch Instagib was mixed and produced by Rufus (my girlfriend's father) around the late 90s to early 2000s."
 fit_content_height = true
 scroll_active = false
 
 [node name="Back" type="Button" parent="VBox"]
-margin_top = 139.0
+margin_top = 229.0
 margin_right = 320.0
-margin_bottom = 171.0
+margin_bottom = 261.0
 rect_min_size = Vector2( 320, 32 )
 text = "Back"
 

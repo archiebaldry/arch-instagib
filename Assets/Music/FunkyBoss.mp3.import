@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/FunkyBoss.mp3-faac025f3640b865c1f0628783367247.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/FunkyBoss.mp3"
+dest_files=[ "res://.import/FunkyBoss.mp3-faac025f3640b865c1f0628783367247.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
