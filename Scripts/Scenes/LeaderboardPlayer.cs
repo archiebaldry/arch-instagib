@@ -3,7 +3,7 @@ using Godot;
 public class LeaderboardPlayer : HBoxContainer
 {
     public int Position = 1;
-    public Peer Peer = new Peer(1, "", Colors.Red);
+    public Peer Peer = new Peer(0, "", Colors.Red, 0);
     
     public override void _Ready()
     {

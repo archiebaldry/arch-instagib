@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Godot;
 
 public class Global : Node
@@ -39,6 +40,9 @@ public class Global : Node
     [Signal]
     public delegate void PlayerStatsUpdated(); // A signal used to tell the leaderboard that a player's stats have changed
 
+    [Signal]
+    public delegate void PlayerRespawned(int id, int spawnIndex); // A signal used to tell Game.cs that a player has respawned
+
     public override void _UnhandledInput(InputEvent @event)
     {
         // If we press the fullscreen keybind
@@ -58,27 +62,28 @@ public class Global : Node
     private void ReceiveClientInfo(string username, Color colour)
     {
         int newPlayerId = GetTree().GetRpcSenderId();
+        int firstSpawnIndex = new Random().Next(24);
         
         // Send the new player every existing player's information
         foreach (Peer player in Players.Values)
         {
-            RpcId(newPlayerId, nameof(AddPlayer), player.Id, player.Username, player.Colour);
+            RpcId(newPlayerId, nameof(AddPlayer), player.Id, player.Username, player.Colour, player.FirstSpawnIndex);
         }
         
         // Send the new player the frag and time limits
         RpcId(newPlayerId, nameof(SetLimits), FragLimit, TimeLimit);
         
         // Add the new player's information to the host's Players
-        AddPlayer(newPlayerId, username, colour);
+        AddPlayer(newPlayerId, username, colour, firstSpawnIndex);
 
         // Send every player (including the new player) the new player's information
-        Rpc(nameof(AddPlayer), newPlayerId, username, colour);
+        Rpc(nameof(AddPlayer), newPlayerId, username, colour, firstSpawnIndex);
     }
 
     [Remote]
-    private void AddPlayer(int id, string username, Color colour)
+    private void AddPlayer(int id, string username, Color colour, int firstSpawnIndex)
     {
-        Players.Add(id, new Peer(id, username, colour)); // Add the player information to Players
+        Players.Add(id, new Peer(id, username, colour, firstSpawnIndex)); // Add the player information to Players
         
         EmitSignal(nameof(PlayersUpdated)); // Tell everyone listening (i.e. the lobby, that we have updated Players)
         
@@ -99,20 +104,17 @@ public class Global : Node
     }
 
     [RemoteSync]
-    public void RespawnPlayer()
+    public void RespawnPlayer(int spawnIndex)
     {
-        int id = GetTree().GetRpcSenderId(); // Get the id of the player who needs respawning
-
-        // Set the player's position to the spawn position
-        GetTree().Root.GetNode<CollisionObject>("Game/" + id).GlobalTransform = new Transform(Basis.Identity, new Vector3(0, 7, 0));
-    } 
-
+        EmitSignal(nameof(PlayerRespawned), GetTree().GetRpcSenderId(), spawnIndex); // Tell our Game.cs that a player has respawned
+    }
+    
     [RemoteSync]
     public void PlayerShot(int shooter, int target)
     {
         if (target == GetTree().GetNetworkUniqueId()) // We are the player that has been shot
         {
-            Rpc(nameof(RespawnPlayer)); // Tell yourself, and everyone else on the network, to respawn you
+            Rpc(nameof(RespawnPlayer), new Random().Next(24)); // Tell yourself, and everyone else on the network, to respawn you
         }
         
         if (shooter == 0) // The shooter is not a player (e.g. falling off map, lava pool)

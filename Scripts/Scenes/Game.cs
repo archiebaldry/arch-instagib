@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 public class Game : Spatial
 {
+    // Private variables
+    private List<Vector3> _spawnpoints = new List<Vector3>();
+
     // Node references
     private Global _global;
     private Label _info;
@@ -26,6 +30,7 @@ public class Game : Spatial
         _gameTimer = GetNode<Timer>("GameTimer");
         
         // Connect signals
+        _global.Connect(nameof(Global.PlayerRespawned), this, nameof(RespawnPlayer));
         _gameTimer.Connect("timeout", this, nameof(TimeLimitReached));
         
         _fpsIndicator.Visible = Global.FpsIndicator; // Decide whether to show FPS indicator from Global.cs
@@ -34,6 +39,12 @@ public class Game : Spatial
 
         _gameTimer.WaitTime = Global.TimeLimit * 60; // Set our wait time to whatever's in Global.cs
         _gameTimer.Start(); // Start the timer
+        
+        // Fetch our spawnpoints
+        foreach (Position3D spawnpoint in GetNode<Spatial>("Spawnpoints").GetChildren())
+        {
+            _spawnpoints.Add(spawnpoint.GlobalTransform.origin);
+        }
         
         // Spawn the players
         foreach (Peer peer in Global.Players.Values)
@@ -69,7 +80,7 @@ public class Game : Spatial
             player.Name = peer.Id.ToString();
             
             // Set their position to the one found in Global.cs Players
-            player.GlobalTransform = new Transform(Basis.Identity, peer.Position);
+            player.GlobalTransform = new Transform(Basis.Identity, _spawnpoints[peer.FirstSpawnIndex]);
             
             // Add the player to the scene
             AddChild(player);
@@ -89,5 +100,10 @@ public class Game : Spatial
     private void TimeLimitReached()
     {
         _global.EndGame(1); // Tell Global.cs that the time limit has been reached and we should end the game
+    }
+
+    private void RespawnPlayer(int id, int spawnIndex)
+    {
+        GetNode<CollisionObject>(id.ToString()).GlobalTransform = new Transform(Basis.Identity, _spawnpoints[spawnIndex]);
     }
 }

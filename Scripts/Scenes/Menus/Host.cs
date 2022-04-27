@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public class Host : Control
@@ -64,7 +65,7 @@ public class Host : Control
         GetTree().NetworkPeer = eNet; // Set the tree's network peer to our server
         
         Global.Players.Clear(); // Clear any player information left behind from previous session
-        Global.Players.Add(1, new Peer(1, Global.Username, Global.Colour)); // Add our info to Players
+        Global.Players.Add(1, new Peer(1, Global.Username, Global.Colour, new Random().Next(24))); // Add our info to Players
         
         GetTree().ChangeScene("res://Scenes/Menus/Lobby.tscn");
     }

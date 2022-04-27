@@ -396,3 +396,77 @@ one_shot = true
 [node name="GameMusic" type="AudioStreamPlayer" parent="."]
 volume_db = -10.0
 script = ExtResource( 2 )
+
+[node name="Spawnpoints" type="Spatial" parent="."]
+
+[node name="0" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0 )
+
+[node name="1" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 7, 2 )
+
+[node name="2" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 7, 9 )
+
+[node name="3" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 7, 5 )
+
+[node name="4" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 7, -7 )
+
+[node name="5" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 7, -8 )
+
+[node name="6" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 1, -4 )
+
+[node name="7" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 1, -8 )
+
+[node name="8" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 1, 3 )
+
+[node name="9" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 1, 3 )
+
+[node name="10" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 1, 10 )
+
+[node name="11" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 1, 8 )
+
+[node name="12" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 1, 2 )
+
+[node name="13" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 1, -1 )
+
+[node name="14" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 1, -10 )
+
+[node name="15" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -41, 1, -5 )
+
+[node name="16" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 4, 4 )
+
+[node name="17" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43, 4, -8 )
+
+[node name="18" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 4, 5 )
+
+[node name="19" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 4, 2 )
+
+[node name="20" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43, 4, -5 )
+
+[node name="21" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 4, 8 )
+
+[node name="22" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 10, -3 )
+
+[node name="23" type="Position3D" parent="Spawnpoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 10, 4 )
