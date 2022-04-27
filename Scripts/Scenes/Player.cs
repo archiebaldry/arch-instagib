@@ -43,6 +43,14 @@ public class Player : KinematicBody
 
     public override void _PhysicsProcess(float delta)
     {
+        // FALLING OFF THE MAP
+
+        if (GlobalTransform.origin.y <= -1)
+        {
+            // Tell everyone on the network that we fell off the map
+            _global.Rpc(nameof(Global.PlayerShot), 0, GetTree().GetNetworkUniqueId());
+        }
+        
         // SHOOTING
 
         if (!Global.GamePaused && Input.IsActionJustPressed("fire"))
@@ -56,13 +64,13 @@ public class Player : KinematicBody
                 int target = area.Name.ToInt();
                 
                 // Tell everyone on the network that we've made a frag
-                _global.Rpc(nameof(Global.PlayerShot), target);
+                _global.Rpc(nameof(Global.PlayerShot), GetTree().GetNetworkUniqueId(), target);
             }
             // Miss
             else
             {
                 // Tell everyone on the network that we've taken a shot and missed
-                _global.Rpc(nameof(Global.PlayerShot), -1);
+                _global.Rpc(nameof(Global.PlayerShot), GetTree().GetNetworkUniqueId(), 0);
             }
         }
         

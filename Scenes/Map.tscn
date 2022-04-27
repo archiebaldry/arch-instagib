@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Resources/Materials/Lava.tres" type="Material" id=1]
 [ext_resource path="res://Resources/Materials/Ground.tres" type="Material" id=2]
 [ext_resource path="res://Resources/Materials/Green.tres" type="Material" id=3]
 [ext_resource path="res://Resources/Materials/Purple.tres" type="Material" id=4]
 [ext_resource path="res://Resources/Materials/Red.tres" type="Material" id=5]
+[ext_resource path="res://Scripts/Scenes/LavaPool.cs" type="Script" id=6]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 8, 0.25, 8 )
@@ -190,8 +191,9 @@ height = 3.0
 depth = 3.0
 material = ExtResource( 4 )
 
-[node name="LavaPool1" type="StaticBody" parent="."]
+[node name="LavaPool1" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 0 )
+script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="LavaPool1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
@@ -201,8 +203,9 @@ shape = SubResource( 1 )
 mesh = SubResource( 3 )
 material/0 = null
 
-[node name="LavaPool2" type="StaticBody" parent="."]
+[node name="LavaPool2" type="Area" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0 )
+script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="LavaPool2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )

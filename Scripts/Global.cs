@@ -108,31 +108,34 @@ public class Global : Node
     } 
 
     [RemoteSync]
-    public void PlayerShot(int target) // Ideally we'd use "target = -1" here but RPC doesn't handle it well
+    public void PlayerShot(int shooter, int target)
     {
-        // We are the player that has been shot
-        if (target == GetTree().GetNetworkUniqueId())
+        if (target == GetTree().GetNetworkUniqueId()) // We are the player that has been shot
         {
-            // Tell everyone (including self) to respawn you
-            Rpc(nameof(RespawnPlayer));
+            Rpc(nameof(RespawnPlayer)); // Tell yourself, and everyone else on the network, to respawn you
         }
         
-        int shooter = GetTree().GetRpcSenderId(); // The shooter is the person who made the function call
-
-        Players[shooter].Shots += 1; // Increment shots
-
-        if (target != -1) // There was a target (i.e. it was a frag)
+        if (shooter == 0) // The shooter is not a player (e.g. falling off map, lava pool)
         {
-            Players[shooter].Frags += 1; // Increment frags for shooter
-            Players[target].Deaths += 1; // Increment deaths for target
+            Players[target].Deaths += 1; // Record a death for the target
+        }
+        else // The shooter is a player
+        {
+            Players[shooter].Shots += 1; // Record a shot for the shooter
 
-            if (Players[shooter].Frags == FragLimit) // GAME OVER! - player reached the frag limit
+            if (target != 0) // The shooter hit another player (i.e. frag)
             {
-                EndGame(0);
+                Players[shooter].Frags += 1; // Record a frag for the shooter
+                Players[target].Deaths += 1; // Record a death for the target
+                
+                if (Players[shooter].Frags == FragLimit) // The shooter has reached the frag limit
+                {
+                    EndGame(0); // End the game
+                }
             }
         }
         
-        EmitSignal(nameof(PlayerStatsUpdated)); // Tell everyone listening (i.e. the leaderboard) that player stats have changed
+        EmitSignal(nameof(PlayerStatsUpdated)); // Tell the leaderboard that player stats have changed
     }
 
     [Remote]
