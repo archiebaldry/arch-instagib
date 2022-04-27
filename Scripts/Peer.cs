@@ -22,6 +22,6 @@ public class Peer
     public int GetAccuracy()
     {
         if (Shots == 0) return 100;
-        return (int) (Frags / (double) Shots) * 100;
+        return (int) (Frags / (double) Shots * 100);
     }
 }
