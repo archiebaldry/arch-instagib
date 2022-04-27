@@ -37,50 +37,62 @@ __meta__ = {
 }
 
 [node name="Logo" type="TextureRect" parent="VBox"]
-margin_right = 320.0
-margin_bottom = 106.0
+margin_right = 640.0
+margin_bottom = 347.0
 texture = ExtResource( 5 )
 
 [node name="Host" type="Button" parent="VBox"]
-margin_top = 110.0
-margin_right = 320.0
-margin_bottom = 142.0
+margin_left = 160.0
+margin_top = 351.0
+margin_right = 480.0
+margin_bottom = 383.0
 rect_min_size = Vector2( 320, 32 )
+size_flags_horizontal = 4
 text = "Host Game"
 
 [node name="Join" type="Button" parent="VBox"]
-margin_top = 146.0
-margin_right = 320.0
-margin_bottom = 178.0
+margin_left = 160.0
+margin_top = 387.0
+margin_right = 480.0
+margin_bottom = 419.0
 rect_min_size = Vector2( 320, 32 )
+size_flags_horizontal = 4
 text = "Join Game"
 
 [node name="Performance" type="Button" parent="VBox"]
-margin_top = 182.0
-margin_right = 320.0
-margin_bottom = 214.0
+margin_left = 160.0
+margin_top = 423.0
+margin_right = 480.0
+margin_bottom = 455.0
 rect_min_size = Vector2( 320, 32 )
+size_flags_horizontal = 4
 text = "Performance"
 
 [node name="Credits" type="Button" parent="VBox"]
-margin_top = 218.0
-margin_right = 320.0
-margin_bottom = 250.0
+margin_left = 160.0
+margin_top = 459.0
+margin_right = 480.0
+margin_bottom = 491.0
 rect_min_size = Vector2( 320, 32 )
+size_flags_horizontal = 4
 text = "Credits"
 
 [node name="Settings" type="Button" parent="VBox"]
-margin_top = 254.0
-margin_right = 320.0
-margin_bottom = 286.0
+margin_left = 160.0
+margin_top = 495.0
+margin_right = 480.0
+margin_bottom = 527.0
 rect_min_size = Vector2( 320, 32 )
+size_flags_horizontal = 4
 text = "Settings"
 
 [node name="Quit" type="Button" parent="VBox"]
-margin_top = 290.0
-margin_right = 320.0
-margin_bottom = 322.0
+margin_left = 160.0
+margin_top = 531.0
+margin_right = 480.0
+margin_bottom = 563.0
 rect_min_size = Vector2( 320, 32 )
+size_flags_horizontal = 4
 text = "Quit to OS"
 
 [node name="Music" parent="." instance=ExtResource( 6 )]
