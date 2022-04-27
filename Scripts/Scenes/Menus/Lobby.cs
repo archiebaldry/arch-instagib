@@ -56,6 +56,8 @@ public class Lobby : Control
     [RemoteSync]
     private void StartGame()
     {
+        Global.InGame = true; // Tell Global.cs the game has now started
+        
         GetTree().ChangeScene("res://Scenes/Game.tscn"); // Change our scene to the game scene
     }
 }

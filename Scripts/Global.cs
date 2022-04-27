@@ -29,9 +29,10 @@ public class Global : Node
 
     // Other public variables
     public static readonly Dictionary<int, Peer> Players = new Dictionary<int, Peer>(); // Holds information of every player in the server
-    public static bool GamePaused = false; // Is the game paused?
+    public static bool GamePaused; // Is the game paused?
     public static float PanoCameraElapsed = 50;
-    public static float MenuMusicPosition = 0;
+    public static float MenuMusicPosition;
+    public static bool InGame; // Are we in the game or the lobby?
     
     // Signals
     [Signal]
@@ -43,6 +44,12 @@ public class Global : Node
     [Signal]
     public delegate void PlayerRespawned(int id, int spawnIndex); // A signal used to tell Game.cs that a player has respawned
 
+    public override void _Ready()
+    {
+        GetTree().Connect("network_peer_disconnected", this, nameof(PeerDisconnected)); // A player disconnected
+        GetTree().Connect("server_disconnected", this, nameof(HostDisconnected)); // The server went offline (i.e. the host disconnected)
+    }
+
     public override void _UnhandledInput(InputEvent @event)
     {
         // If we press the fullscreen keybind
@@ -50,6 +57,31 @@ public class Global : Node
         {
             // Flip the value of OS.WindowFullscreen to toggle fullscreen
             OS.WindowFullscreen = !OS.WindowFullscreen;
+        }
+    }
+
+    private void PeerDisconnected(int id)
+    {
+        if (InGame) // In the game
+        {
+            EndGame(2); // End the game and tell the method why
+        }
+        else // In the lobby
+        {
+            Players.Remove(id); // Remove the player's info
+            EmitSignal(nameof(PlayersUpdated)); // Tell lobby to update player list
+        }
+    }
+
+    private void HostDisconnected()
+    {
+        if (InGame) // In the game
+        {
+            EndGame(2); // End the game and tell the method why
+        }
+        else // In the lobby
+        {
+            Disconnect(); // Disconnect from the lobby
         }
     }
 
@@ -160,13 +192,14 @@ public class Global : Node
         GamePaused = false;
         PanoCameraElapsed = 50;
         MenuMusicPosition = 0;
+        InGame = false;
     }
 
     public void EndGame(int type)
     {
         // 0) Frag limit reached
         // 1) Time limit reached
-        // 2) TODO: A player left the game
+        // 2) A player left the game
         
         GD.Print($"Game ended: reason {type}");
         
