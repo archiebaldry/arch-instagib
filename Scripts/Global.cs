@@ -152,6 +152,12 @@ public class Global : Node
         GetTree().NetworkPeer = null; // Clear our network peer
         GetTree().ChangeScene("res://Scenes/Menus/Main.tscn"); // Send the player back to the main menu
         Input.SetMouseMode(Input.MouseMode.Visible); // Make the mouse cursor visible
+        
+        // Reset the global values
+        Players.Clear();
+        GamePaused = false;
+        PanoCameraElapsed = 50;
+        MenuMusicPosition = 0;
     }
 
     public void EndGame(int type)

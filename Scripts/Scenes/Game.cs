@@ -31,12 +31,7 @@ public class Game : Spatial
         _fpsIndicator.Visible = Global.FpsIndicator; // Decide whether to show FPS indicator from Global.cs
         
         Input.SetMouseMode(Input.MouseMode.Captured); // Capture the mouse
-        
-        // Reset the global values
-        Global.GamePaused = false;
-        Global.PanoCameraElapsed = 50;
-        Global.MenuMusicPosition = 0;
-        
+
         _gameTimer.WaitTime = Global.TimeLimit * 60; // Set our wait time to whatever's in Global.cs
         _gameTimer.Start(); // Start the timer
         
