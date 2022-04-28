@@ -101,6 +101,6 @@ public class PauseMenu : ColorRect
     private void SetPlayerFov(int value)
     {
         // Get the player's camera and set it's fov to the value passed
-        GetTree().Root.GetNode<Camera>("Game/" + GetTree().GetNetworkUniqueId() + "/Camera").Fov = value;
+        GetTree().Root.GetNode<Camera>("Game/" + Global.NetId + "/Camera").Fov = value;
     }
 }

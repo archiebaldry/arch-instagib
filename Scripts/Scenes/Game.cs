@@ -52,7 +52,7 @@ public class Game : Spatial
             CollisionObject player;
             
             // If we are this player (Player)
-            if (peer.Id == GetTree().GetNetworkUniqueId())
+            if (peer.Id == Global.NetId)
             {
                 // Get instance of our Player scene
                 player = (KinematicBody) GD.Load<PackedScene>("res://Scenes/Player.tscn").Instance();

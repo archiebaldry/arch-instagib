@@ -5,6 +5,7 @@ using Godot;
 public class Global : Node
 {
     // Game settings
+    public static int NetId;
     public static string Username = "Player";
     public static Color Colour = Colors.Red;
     public static Vector2 Sensitivity = new Vector2(3, 3);
@@ -122,6 +123,8 @@ public class Global : Node
         // If I am adding my own information (i.e. the server has responded to me sending my client info) then I should change my scene to the lobby scene
         if (id == GetTree().GetNetworkUniqueId())
         {
+            NetId = GetTree().GetNetworkUniqueId();
+            
             GetTree().ChangeScene("res://Scenes/Menus/Lobby.tscn");
         }
     }
@@ -144,7 +147,7 @@ public class Global : Node
     [RemoteSync]
     public void PlayerShot(int shooter, int target)
     {
-        if (target == GetTree().GetNetworkUniqueId()) // We are the player that has been shot
+        if (target == Global.NetId) // We are the player that has been shot
         {
             Rpc(nameof(RespawnPlayer), new Random().Next(24)); // Tell yourself, and everyone else on the network, to respawn you
         }
@@ -179,12 +182,12 @@ public class Global : Node
         TimeLimit = timeLimit;
     }
 
-    public void Disconnect()
+    public void Disconnect(bool skipSceneChange = false)
     {
         NetworkedMultiplayerENet eNet = (NetworkedMultiplayerENet) GetTree().NetworkPeer; // Get the ENet from the network peer
         eNet.CloseConnection(); // Close our connection with the server
         GetTree().NetworkPeer = null; // Clear our network peer
-        GetTree().ChangeScene("res://Scenes/Menus/Main.tscn"); // Send the player back to the main menu
+        if (!skipSceneChange) GetTree().ChangeScene("res://Scenes/Menus/Main.tscn"); // Send the player back to the main menu
         Input.SetMouseMode(Input.MouseMode.Visible); // Make the mouse cursor visible
         
         // Reset the global values
@@ -203,6 +206,6 @@ public class Global : Node
         
         GD.Print($"Game ended: reason {type}");
         
-        Disconnect();
+        GetTree().ChangeScene("res://Scenes/Menus/GameOver.tscn");
     }
 }

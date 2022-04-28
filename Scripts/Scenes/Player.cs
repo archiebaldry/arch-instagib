@@ -48,7 +48,7 @@ public class Player : KinematicBody
         if (GlobalTransform.origin.y <= -1)
         {
             // Tell everyone on the network that we fell off the map
-            _global.Rpc(nameof(Global.PlayerShot), 0, GetTree().GetNetworkUniqueId());
+            _global.Rpc(nameof(Global.PlayerShot), 0, Global.NetId);
         }
         
         // SHOOTING
@@ -64,13 +64,13 @@ public class Player : KinematicBody
                 int target = area.Name.ToInt();
                 
                 // Tell everyone on the network that we've made a frag
-                _global.Rpc(nameof(Global.PlayerShot), GetTree().GetNetworkUniqueId(), target);
+                _global.Rpc(nameof(Global.PlayerShot), Global.NetId, target);
             }
             // Miss
             else
             {
                 // Tell everyone on the network that we've taken a shot and missed
-                _global.Rpc(nameof(Global.PlayerShot), GetTree().GetNetworkUniqueId(), 0);
+                _global.Rpc(nameof(Global.PlayerShot), Global.NetId, 0);
             }
         }
         

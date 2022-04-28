@@ -17,10 +17,10 @@ public class LavaPool : Area
     private void BodyEntered(Node body)
     {
         // The player this client controls touched the lava pool
-        if (body.Name == GetTree().GetNetworkUniqueId().ToString())
+        if (body.Name == Global.NetId.ToString())
         {
             // Tell everyone on the network that we touched the lava pool
-            _global.Rpc(nameof(Global.PlayerShot), 0, GetTree().GetNetworkUniqueId());
+            _global.Rpc(nameof(Global.PlayerShot), 0, Global.NetId.ToString());
         }
     }
 }
