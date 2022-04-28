@@ -49,6 +49,9 @@ public class GameSettings : Control
         Global.Fov = (int) _fov.Value;
         Global.PlayerDebug = _playerDebug.Pressed;
         
+        // Tell Global.cs to save to file
+        GetNode<Global>("/root/Global").SaveDataToFile();
+        
         BackPressed();
     }
 }

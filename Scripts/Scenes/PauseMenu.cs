@@ -94,6 +94,9 @@ public class PauseMenu : ColorRect
         Global.Sensitivity.y = (float) _sensitivityY.Value;
         Global.Fov = (int) _fov.Value;
         
+        // Tell Global.cs to save to file
+        GetNode<Global>("/root/Global").SaveDataToFile();
+        
         _main.Visible = true; // Show main buttons
         _options.Visible = false; // Hide options
     }

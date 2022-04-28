@@ -4,6 +4,12 @@ using Godot;
 
 public class Global : Node
 {
+    // Performance
+    public static int TotalGames = 0;
+    public static int TotalShots = 0;
+    public static int TotalFrags = 0;
+    public static int TotalDeaths = 0;
+    
     // Game settings
     public static int NetId;
     public static string Username = "Player";
@@ -207,5 +213,18 @@ public class Global : Node
         GD.Print($"Game ended: reason {type}");
         
         GetTree().ChangeScene("res://Scenes/Menus/GameOver.tscn");
+    }
+
+    public void SaveDataToFile()
+    {
+        File file = new File(); // Make new file object
+        
+        file.Open("user://data.json", File.ModeFlags.Write); // Open data.json for writing in special user folder
+
+        string dataAsJsonStr = "{" + @"""username"": """ + Username + @""", " + @"""colour"": ""#" + Colour.ToHtml() + @""", " + @"""sensitivity"": [" + Sensitivity.x + ", " + Sensitivity.y + "], " + @"""fov"": " + Fov + ", " + @"""playerDebug"": " + PlayerDebug.ToString().ToLower() + ", " + @"""fpsIndicator"": " + FpsIndicator.ToString().ToLower() + ", " + @"""totalGames"": " + TotalGames + ", " + @"""totalShots"": " + TotalShots + ", " + @"""totalFrags"": " + TotalFrags + ", " + @"""totalDeaths"": " + TotalDeaths + "}"; // Fetch data and record it in a JSON string
+        
+        file.StoreString(dataAsJsonStr); // Store the data
+        
+        file.Close(); // Close the file
     }
 }

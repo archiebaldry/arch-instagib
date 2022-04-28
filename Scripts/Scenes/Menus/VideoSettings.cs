@@ -49,6 +49,9 @@ public class VideoSettings : Control
         OS.VsyncEnabled = _vsync.Pressed;
         Global.FpsIndicator = _fps.Pressed;
         
+        // Tell Global.cs to save to file
+        GetNode<Global>("/root/Global").SaveDataToFile();
+        
         BackPressed();
     }
 }

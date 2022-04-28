@@ -17,35 +17,31 @@ public class GameOver : Control
         
         Peer peer = Global.Players[Global.NetId]; // Get our information from Global.cs
         
-        GetNode<RichTextLabel>("VBox/RichText").Text = $"Position: N/A\nShots: {peer.Shots}\nFrags: {peer.Frags}\nAccuracy: {peer.GetAccuracy()}%\nDeaths: {peer.Deaths}"; // TODO: Add position
-    }
+        // Save stats to Global.cs
+        Global.TotalGames += 1;
+        Global.TotalShots += peer.Shots;
+        Global.TotalFrags += peer.Frags;
+        Global.TotalDeaths += peer.Deaths;
+        _global.SaveDataToFile();
 
-    private void SaveAndDisconnect()
-    {
-        // Save
-        // TODO: Save stats to performance
-        
-        // Disconnect
-        _global.Disconnect(true);
+        GetNode<RichTextLabel>("VBox/RichText").Text = $"Position: N/A\nShots: {peer.Shots}\nFrags: {peer.Frags}\nAccuracy: {peer.GetAccuracy()}%\nDeaths: {peer.Deaths}"; // TODO: Add position
     }
     
     private void MainMenuPressed()
     {
-        SaveAndDisconnect();
-        
-        GetTree().ChangeScene("res://Scenes/Menus/Main.tscn");
+        _global.Disconnect();
     }
     
     private void PerformancePressed()
     {
-        SaveAndDisconnect();
+        _global.Disconnect(true);
         
         GetTree().ChangeScene("res://Scenes/Menus/Performance.tscn");
     }
     
     private void QuitPressed()
     {
-        SaveAndDisconnect();
+        _global.Disconnect(true);
         
         GetTree().Quit();
     }
