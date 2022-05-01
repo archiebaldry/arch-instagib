@@ -49,11 +49,16 @@ public class Global : Node
     ""sensitivity"": [{2}, {3}],
     ""fov"": {4},
     ""playerDebug"": {5},
-    ""fpsIndicator"": {6},
-    ""totalGames"": {7},
-    ""totalShots"": {8},
-    ""totalFrags"": {9},
-    ""totalDeaths"": {10}
+    ""sharpness"": {6},
+    ""msaa"": {7},
+    ""fxaa"": {8},
+    ""fullscreen"": {9},
+    ""vsync"": {10},
+    ""fpsIndicator"": {11},
+    ""totalGames"": {12},
+    ""totalShots"": {13},
+    ""totalFrags"": {14},
+    ""totalDeaths"": {15}
 }}";
     
     // Signals
@@ -83,6 +88,9 @@ public class Global : Node
         {
             // Flip the value of OS.WindowFullscreen to toggle fullscreen
             OS.WindowFullscreen = !OS.WindowFullscreen;
+            
+            // Save their choice to data.json
+            SaveDataToFile();
         }
     }
 
@@ -240,12 +248,12 @@ public class Global : Node
         
         file.Open("user://data.json", File.ModeFlags.Write); // Open data.json for writing in special user folder
 
-        file.StoreString(string.Format(DataTemplate, Username, Colour.ToHtml(), Sensitivity.x, Sensitivity.y, Fov, PlayerDebug.ToString().ToLower(), FpsIndicator.ToString().ToLower(), TotalGames, TotalShots, TotalFrags, TotalDeaths)); // Store the data
+        file.StoreString(string.Format(DataTemplate, Username, Colour.ToHtml(), Sensitivity.x, Sensitivity.y, Fov, PlayerDebug.ToString().ToLower(), (float) ProjectSettings.GetSetting("rendering/quality/filters/sharpen_intensity"), (int) ProjectSettings.GetSetting("rendering/quality/filters/msaa"), ((bool) ProjectSettings.GetSetting("rendering/quality/filters/use_fxaa")).ToString().ToLower(), FpsIndicator.ToString().ToLower(), OS.WindowFullscreen.ToString().ToLower(), OS.VsyncEnabled.ToString().ToLower(), TotalGames, TotalShots, TotalFrags, TotalDeaths)); // Store the data
         
         file.Close(); // Close the file
     }
 
-    private void ReadDataFromFile()
+    private static void ReadDataFromFile()
     {
         File file = new File(); // Make new file object
 
@@ -282,6 +290,21 @@ public class Global : Node
             
             // Player debug
             if (data.Contains("playerDebug") && data["playerDebug"] is bool playerDebug) PlayerDebug = playerDebug;
+            
+            // Sharpness
+            if (data.Contains("sharpness") && data["sharpness"] is float sharpness) ProjectSettings.SetSetting("rendering/quality/filters/sharpen_intensity", sharpness);
+            
+            // MSAA
+            if (data.Contains("msaa") && data["msaa"] is float msaa) ProjectSettings.SetSetting("rendering/quality/filters/msaa", (int) msaa);
+            
+            // FXAA
+            if (data.Contains("fxaa") && data["fxaa"] is bool fxaa) ProjectSettings.SetSetting("rendering/quality/filters/use_fxaa", fxaa);
+            
+            // Fullscreen
+            if (data.Contains("fullscreen") && data["fullscreen"] is bool fullscreen) OS.WindowFullscreen = fullscreen;
+            
+            // VSync
+            if (data.Contains("vsync") && data["vsync"] is bool vsync) OS.VsyncEnabled = vsync;
             
             // FPS indicator
             if (data.Contains("fpsIndicator") && data["fpsIndicator"] is bool fpsIndicator) FpsIndicator = fpsIndicator;
