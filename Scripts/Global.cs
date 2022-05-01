@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
+using Array = Godot.Collections.Array;
 
 public class Global : Node
 {
     // Performance
-    public static int TotalGames = 0;
-    public static int TotalShots = 0;
-    public static int TotalFrags = 0;
-    public static int TotalDeaths = 0;
+    public static int TotalGames;
+    public static int TotalShots;
+    public static int TotalFrags;
+    public static int TotalDeaths;
     
     // Game settings
     public static int NetId;
@@ -35,7 +36,7 @@ public class Global : Node
     public static int TimeLimit = 20;
 
     // Other public variables
-    public static readonly Dictionary<int, Peer> Players = new Dictionary<int, Peer>(); // Holds information of every player in the server
+    public static readonly System.Collections.Generic.Dictionary<int, Peer> Players = new System.Collections.Generic.Dictionary<int, Peer>(); // Holds information of every player in the server
     public static bool GamePaused; // Is the game paused?
     public static float PanoCameraElapsed = 50;
     public static float MenuMusicPosition;
@@ -53,8 +54,12 @@ public class Global : Node
 
     public override void _Ready()
     {
+        // Connect signals
         GetTree().Connect("network_peer_disconnected", this, nameof(PeerDisconnected)); // A player disconnected
         GetTree().Connect("server_disconnected", this, nameof(HostDisconnected)); // The server went offline (i.e. the host disconnected)
+        
+        // Read data from file
+        ReadDataFromFile();
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -153,7 +158,7 @@ public class Global : Node
     [RemoteSync]
     public void PlayerShot(int shooter, int target)
     {
-        if (target == Global.NetId) // We are the player that has been shot
+        if (target == NetId) // We are the player that has been shot
         {
             Rpc(nameof(RespawnPlayer), new Random().Next(24)); // Tell yourself, and everyone else on the network, to respawn you
         }
@@ -224,6 +229,63 @@ public class Global : Node
         string dataAsJsonStr = "{" + @"""username"": """ + Username + @""", " + @"""colour"": ""#" + Colour.ToHtml() + @""", " + @"""sensitivity"": [" + Sensitivity.x + ", " + Sensitivity.y + "], " + @"""fov"": " + Fov + ", " + @"""playerDebug"": " + PlayerDebug.ToString().ToLower() + ", " + @"""fpsIndicator"": " + FpsIndicator.ToString().ToLower() + ", " + @"""totalGames"": " + TotalGames + ", " + @"""totalShots"": " + TotalShots + ", " + @"""totalFrags"": " + TotalFrags + ", " + @"""totalDeaths"": " + TotalDeaths + "}"; // Fetch data and record it in a JSON string
         
         file.StoreString(dataAsJsonStr); // Store the data
+        
+        file.Close(); // Close the file
+    }
+
+    private void ReadDataFromFile()
+    {
+        File file = new File(); // Make new file object
+
+        if (!file.FileExists("user://data.json")) return; // If the file does not exist there is no data to read
+
+        file.Open("user://data.json", File.ModeFlags.Read); // Open data.json for reading in special user folder
+
+        string contents = file.GetAsText(); // Get the contents of the file as a string
+
+        JSONParseResult parseResult = JSON.Parse(contents); // Attempt to parse the contents as JSON
+
+        if (parseResult.Error == Error.Ok && parseResult.Result is Dictionary data) // The parse was a success!
+        {
+            // We read any values we know to be ints as floats, and then cast them to ints, as just jumping straight to ints wasn't working 
+            
+            // Username
+            if (data.Contains("username") && data["username"] is string username) Username = username;
+            
+            // Colour
+            if (data.Contains("colour") && data["colour"] is string colour) Colour = new Color(colour);
+            
+            // Sensitivity
+            if (data.Contains("sensitivity") && data["sensitivity"] is Array sensitivity)
+            {
+                if (sensitivity.Count == 2 && sensitivity[0] is float x && sensitivity[1] is float y)
+                {
+                    Sensitivity.x = x;
+                    Sensitivity.y = y;
+                }
+            }
+            
+            // Field of view
+            if (data.Contains("fov") && data["fov"] is float fov) Fov = (int) fov;
+            
+            // Player debug
+            if (data.Contains("playerDebug") && data["playerDebug"] is bool playerDebug) PlayerDebug = playerDebug;
+            
+            // FPS indicator
+            if (data.Contains("fpsIndicator") && data["fpsIndicator"] is bool fpsIndicator) FpsIndicator = fpsIndicator;
+            
+            // Total games
+            if (data.Contains("totalGames") && data["totalGames"] is float totalGames) TotalGames = (int) totalGames;
+            
+            // Total shots
+            if (data.Contains("totalShots") && data["totalShots"] is float totalShots) TotalShots = (int) totalShots;
+            
+            // Total frags
+            if (data.Contains("totalFrags") && data["totalFrags"] is float totalFrags) TotalFrags = (int) totalFrags;
+            
+            // Total deaths
+            if (data.Contains("totalDeaths") && data["totalDeaths"] is float totalDeaths) TotalDeaths = (int) totalDeaths;
+        }
         
         file.Close(); // Close the file
     }
