@@ -42,6 +42,20 @@ public class Global : Node
     public static float MenuMusicPosition;
     public static bool InGame; // Are we in the game or the lobby?
     
+    // Data JSON template
+    private const string DataTemplate = @"{{
+    ""username"": ""{0}"",
+    ""colour"": ""#{1}"",
+    ""sensitivity"": [{2}, {3}],
+    ""fov"": {4},
+    ""playerDebug"": {5},
+    ""fpsIndicator"": {6},
+    ""totalGames"": {7},
+    ""totalShots"": {8},
+    ""totalFrags"": {9},
+    ""totalDeaths"": {10}
+}}";
+    
     // Signals
     [Signal]
     public delegate void PlayersUpdated(); // A signal used to tell the lobby that we have updated Players
@@ -226,9 +240,7 @@ public class Global : Node
         
         file.Open("user://data.json", File.ModeFlags.Write); // Open data.json for writing in special user folder
 
-        string dataAsJsonStr = "{" + @"""username"": """ + Username + @""", " + @"""colour"": ""#" + Colour.ToHtml() + @""", " + @"""sensitivity"": [" + Sensitivity.x + ", " + Sensitivity.y + "], " + @"""fov"": " + Fov + ", " + @"""playerDebug"": " + PlayerDebug.ToString().ToLower() + ", " + @"""fpsIndicator"": " + FpsIndicator.ToString().ToLower() + ", " + @"""totalGames"": " + TotalGames + ", " + @"""totalShots"": " + TotalShots + ", " + @"""totalFrags"": " + TotalFrags + ", " + @"""totalDeaths"": " + TotalDeaths + "}"; // Fetch data and record it in a JSON string
-        
-        file.StoreString(dataAsJsonStr); // Store the data
+        file.StoreString(string.Format(DataTemplate, Username, Colour.ToHtml(), Sensitivity.x, Sensitivity.y, Fov, PlayerDebug.ToString().ToLower(), FpsIndicator.ToString().ToLower(), TotalGames, TotalShots, TotalFrags, TotalDeaths)); // Store the data
         
         file.Close(); // Close the file
     }
