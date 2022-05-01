@@ -94,7 +94,7 @@ public class Game : Spatial
         _info.Text = $"Deathmatch\nFrag Limit: {Global.FragLimit}\nTime Limit: {timeLeft:mm\\:ss}";
         
         // Update FPS indicator
-        _fpsIndicator.Text = Performance.GetMonitor(Performance.Monitor.TimeFps).ToString();
+        _fpsIndicator.Text = Godot.Performance.GetMonitor(Godot.Performance.Monitor.TimeFps).ToString();
     }
 
     private void TimeLimitReached()
