@@ -10,9 +10,9 @@ config_version=4
 
 [application]
 
-config/name="NEA"
+config/name="Arch Instagib"
 run/main_scene="res://Scenes/Menus/Main.tscn"
-config/icon="res://Assets/Icon.png"
+config/icon="res://icon.png"
 
 [autoload]
 
