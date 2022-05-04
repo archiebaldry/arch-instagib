@@ -12,7 +12,8 @@ config_version=4
 
 config/name="Arch Instagib"
 run/main_scene="res://Scenes/Menus/Main.tscn"
-config/icon="res://Assets/Icon.png"
+config/icon="res://Assets/Branding/Icon.png"
+config/windows_native_icon="res://Assets/Branding/Icon.ico"
 
 [autoload]
 
