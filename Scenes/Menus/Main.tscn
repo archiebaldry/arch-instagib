@@ -95,4 +95,19 @@ rect_min_size = Vector2( 320, 32 )
 size_flags_horizontal = 4
 text = "Quit to OS"
 
+[node name="BuildNo" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -14.0
+margin_right = 40.0
+margin_bottom = -8.0
+grow_vertical = 0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Build 1"
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Music" parent="." instance=ExtResource( 6 )]
