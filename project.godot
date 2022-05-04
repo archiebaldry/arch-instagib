@@ -11,6 +11,7 @@ config_version=4
 [application]
 
 config/name="Arch Instagib"
+config/description="A 3D first-person arena shooter inspired by Ratz Instagib. Originally developed for Archie Baldry's A Level Computer Science NEA. Built in the Godot Mono game engine and written in C#."
 run/main_scene="res://Scenes/Menus/Main.tscn"
 config/icon="res://Assets/Branding/Icon.png"
 config/windows_native_icon="res://Assets/Branding/Icon.ico"
